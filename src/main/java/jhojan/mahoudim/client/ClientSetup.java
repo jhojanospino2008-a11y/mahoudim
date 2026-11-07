@@ -73,7 +73,8 @@ public final class ClientSetup {
       itemRenderer.renderStatic(
             player,
             wheel,
-            ItemDisplayContext.HEAD,
+            // NONE avoids the model's HEAD display transform, which was moving it to the feet.
+            ItemDisplayContext.NONE,
             false,
             poseStack,
             event.getMultiBufferSource(),

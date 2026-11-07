@@ -231,5 +231,6 @@
   "mahoudim.book.mahora_adaptation.desc": "El ritual concede una Rueda de Mahora. Mientras esté en tu inventario, aprende cada tipo de daño por separado. Cada dos impactos válidos del mismo tipo, la rueda gira y reduce ese daño un 25 %, luego 50 %, hasta un máximo del 75 %. La adaptación a ese tipo se reinicia tras cinco minutos sin recibir otro impacto.",
   "mahoudim.msg.mahora_already_have_wheel": "Ya llevas una Rueda de Mahora.",
   "mahoudim.msg.mahora_wheel_received": "La Rueda de Mahora te reconoce. Equípala como casco para adaptarte.",
-  "mahoudim.msg.mahora_adapted": "La rueda gira: adaptación nivel %s/3 para ese tipo de daño."
+  "mahoudim.msg.mahora_adapted": "La rueda gira: adaptación nivel %s/3 para ese tipo de daño.",
+  "item.mahoudim.mahora_wheel.adapted_to": "  Adaptada a: %s"
 }

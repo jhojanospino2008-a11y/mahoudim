@@ -10,6 +10,9 @@ import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.Level;
 
 public class MahoraWheelItem extends Item implements Equipable {
@@ -30,5 +33,12 @@ public class MahoraWheelItem extends Item implements Equipable {
    @Override
    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
       tooltip.add(Component.translatable("item.mahoudim.mahora_wheel.tooltip"));
+      var data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+      if (data.contains("mahora_adapted_types", Tag.TAG_LIST)) {
+         var types = data.getList("mahora_adapted_types", Tag.TAG_STRING);
+         for (int i = 0; i < types.size(); i++) {
+            tooltip.add(Component.translatable("item.mahoudim.mahora_wheel.adapted_to", types.getString(i)));
+         }
+      }
    }
 }

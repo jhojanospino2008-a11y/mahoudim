@@ -231,5 +231,6 @@
   "mahoudim.book.mahora_adaptation.desc": "The ritual grants a Mahora Wheel. While it is in your inventory, each damage type is learned separately. Every two valid hits of the same type turn the wheel and reduce that damage by 25%, then 50%, up to 75%. That type of adaptation resets after five minutes without another hit.",
   "mahoudim.msg.mahora_already_have_wheel": "You already carry a Mahora Wheel.",
   "mahoudim.msg.mahora_wheel_received": "The Mahora Wheel recognizes you. Equip it as a helmet to adapt.",
-  "mahoudim.msg.mahora_adapted": "The wheel turns: adaptation level %s/3 for that damage type."
+  "mahoudim.msg.mahora_adapted": "The wheel turns: adaptation level %s/3 for that damage type.",
+  "item.mahoudim.mahora_wheel.adapted_to": "  Adapted to: %s"
 }

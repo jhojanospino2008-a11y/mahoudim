@@ -1,6 +1,9 @@
 package jhojan.mahoudim.tech;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,10 +13,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.particles.ParticleTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import jhojan.mahoudim.Reg;
 
 /** Server-side adaptation state for players carrying the Mahora wheel. */
@@ -44,6 +50,7 @@ public final class MahoraAdaptationEvents {
       if (damageType == null || damageType.isBlank()) {
          damageType = "unknown";
       }
+      final String adaptedDamageType = damageType;
 
       CompoundTag playerData = player.getPersistentData();
       CompoundTag modData = playerData.getCompound(ROOT_TAG);
@@ -64,13 +71,29 @@ public final class MahoraAdaptationEvents {
       modData.put(ADAPTATION_TAG, adaptations);
       playerData.put(ROOT_TAG, modData);
 
+      ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
+      CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag -> {
+         ListTag types = tag.contains("mahora_adapted_types", Tag.TAG_LIST)
+               ? tag.getList("mahora_adapted_types", Tag.TAG_STRING) : new ListTag();
+         boolean alreadyRecorded = false;
+         for (int i = 0; i < types.size(); i++) {
+            if (types.getString(i).equals(adaptedDamageType)) {
+               alreadyRecorded = true;
+               break;
+            }
+         }
+         if (!alreadyRecorded) {
+            types.add(StringTag.valueOf(adaptedDamageType));
+            tag.put("mahora_adapted_types", types);
+         }
+      });
+
       int level = adaptationLevel(hits);
       if (level > 0) {
          event.setNewDamage(damage * (1.0F - REDUCTION_PER_LEVEL * level));
       }
 
       if (level > 0 && (hits == START_HITS || (hits > START_HITS && (hits - START_HITS) % HITS_PER_LEVEL == 0))) {
-         ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
          CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag ->
                tag.putInt("mahora_rotation", tag.getInt("mahora_rotation") + 1));
          ServerLevel levelWorld = player.serverLevel();
@@ -78,6 +101,21 @@ public final class MahoraAdaptationEvents {
          levelWorld.playSound(null, player.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 0.8F, 0.8F + 0.2F * level);
          levelWorld.sendParticles(ParticleTypes.END_ROD, pos.x, pos.y, pos.z, 8, 0.25, 0.2, 0.25, 0.015);
          player.displayClientMessage(Component.translatable("mahoudim.msg.mahora_adapted", level), true);
+      }
+   }
+
+   @SubscribeEvent
+   public static void onPlayerTick(PlayerTickEvent.Post event) {
+      if (!(event.getEntity() instanceof ServerPlayer player) || !hasWheel(player)) {
+         return;
+      }
+
+      ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
+      CompoundTag wheelData = wheel.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+      if (wheelData.contains("mahora_adapted_types", Tag.TAG_LIST)
+            && !wheelData.getList("mahora_adapted_types", Tag.TAG_STRING).isEmpty()) {
+         // Strength I while at least one damage type is adapted.
+         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 40, 0, true, false));
       }
    }
 
