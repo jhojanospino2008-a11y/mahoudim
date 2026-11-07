@@ -18,9 +18,10 @@ public final class MahoraAdaptationEvents {
    private static final String ROOT_TAG = "mahoudim";
    private static final String ADAPTATION_TAG = "mahora_adaptation";
    private static final long MEMORY_TTL_TICKS = 5L * 60L * 20L;
-   private static final int MAX_TRACKED_DAMAGE_TYPES = 16;
-   private static final int MAX_HITS = 6;
-   private static final int MAX_LEVEL = 3;
+   private static final int START_HITS = 3;
+   private static final int HITS_PER_LEVEL = 2;
+   private static final int MAX_LEVEL = 4;
+   private static final float REDUCTION_PER_LEVEL = 0.20F;
 
    private MahoraAdaptationEvents() {
    }
@@ -44,10 +45,6 @@ public final class MahoraAdaptationEvents {
       CompoundTag playerData = player.getPersistentData();
       CompoundTag modData = playerData.getCompound(ROOT_TAG);
       CompoundTag adaptations = modData.getCompound(ADAPTATION_TAG);
-      if (!adaptations.contains(damageType) && adaptations.size() >= MAX_TRACKED_DAMAGE_TYPES) {
-         evictOldest(adaptations);
-      }
-
       CompoundTag exposure = adaptations.getCompound(damageType);
       long now = player.server.overworld().getGameTime();
       int hits = exposure.getInt("hits");
@@ -55,25 +52,34 @@ public final class MahoraAdaptationEvents {
          hits = 0;
       }
 
-      hits = Math.min(MAX_HITS, hits + 1);
+      // There is deliberately no global type limit: Mahora can remember every
+      // damage source independently. Each source forgets itself after five minutes.
+      hits++;
       exposure.putInt("hits", hits);
       exposure.putLong("last", now);
       adaptations.put(damageType, exposure);
       modData.put(ADAPTATION_TAG, adaptations);
       playerData.put(ROOT_TAG, modData);
 
-      int level = Math.min(MAX_LEVEL, hits / 2);
+      int level = adaptationLevel(hits);
       if (level > 0) {
-         event.setNewDamage(damage * (1.0F - 0.25F * level));
+         event.setNewDamage(damage * (1.0F - REDUCTION_PER_LEVEL * level));
       }
 
-      if (hits == 2 || hits == 4 || hits == 6) {
+      if (level > 0 && (hits == START_HITS || (hits > START_HITS && (hits - START_HITS) % HITS_PER_LEVEL == 0))) {
          ServerLevel levelWorld = player.serverLevel();
          Vec3 pos = player.position().add(0.0, player.getBbHeight() * 0.7, 0.0);
          levelWorld.playSound(null, player.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 0.8F, 0.8F + 0.2F * level);
          levelWorld.sendParticles(ParticleTypes.END_ROD, pos.x, pos.y, pos.z, 8, 0.25, 0.2, 0.25, 0.015);
          player.displayClientMessage(Component.translatable("mahoudim.msg.mahora_adapted", level), true);
       }
+   }
+
+   private static int adaptationLevel(int hits) {
+      if (hits < START_HITS) {
+         return 0;
+      }
+      return Math.min(MAX_LEVEL, 1 + (hits - START_HITS) / HITS_PER_LEVEL);
    }
 
    public static boolean hasWheel(ServerPlayer player) {
@@ -89,20 +95,5 @@ public final class MahoraAdaptationEvents {
          }
       }
       return false;
-   }
-
-   private static void evictOldest(CompoundTag adaptations) {
-      String oldestType = null;
-      long oldestTime = Long.MAX_VALUE;
-      for (String type : adaptations.getAllKeys()) {
-         long last = adaptations.getCompound(type).getLong("last");
-         if (last < oldestTime) {
-            oldestTime = last;
-            oldestType = type;
-         }
-      }
-      if (oldestType != null) {
-         adaptations.remove(oldestType);
-      }
    }
 }
