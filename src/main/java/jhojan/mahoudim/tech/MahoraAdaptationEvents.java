@@ -7,6 +7,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.particles.ParticleTypes;
@@ -68,6 +70,9 @@ public final class MahoraAdaptationEvents {
       }
 
       if (level > 0 && (hits == START_HITS || (hits > START_HITS && (hits - START_HITS) % HITS_PER_LEVEL == 0))) {
+         ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
+         CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag ->
+               tag.putInt("mahora_rotation", tag.getInt("mahora_rotation") + 1));
          ServerLevel levelWorld = player.serverLevel();
          Vec3 pos = player.position().add(0.0, player.getBbHeight() * 0.7, 0.0);
          levelWorld.playSound(null, player.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 0.8F, 0.8F + 0.2F * level);
