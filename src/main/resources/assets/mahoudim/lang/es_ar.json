@@ -231,5 +231,15 @@
   "mahoudim.book.mahora_adaptation.desc": "El ritual concede una Rueda de Mahora. Mientras esté en tu inventario, aprende cada tipo de daño por separado. Cada dos impactos válidos del mismo tipo, la rueda gira y reduce ese daño un 25 %, luego 50 %, hasta un máximo del 75 %. La adaptación a ese tipo se reinicia tras cinco minutos sin recibir otro impacto.",
   "mahoudim.msg.mahora_already_have_wheel": "Ya llevas una Rueda de Mahora.",
   "mahoudim.msg.mahora_wheel_received": "La Rueda de Mahora te reconoce. Llévala en el inventario para adaptarte.",
-  "mahoudim.msg.mahora_adapted": "La rueda gira: adaptación nivel %s/3 para ese tipo de daño."
+  "mahoudim.msg.mahora_adapted": "La rueda gira: adaptación nivel %s/3 para ese tipo de daño.",
+  "item.mahoudim.juadana": "Guadaña de las Almas",
+  "item.mahoudim.juadana.tooltip": "Hace 20 de daño. Cada baja llena su carga; al llegar a 100, el siguiente golpe inflige 100 de daño y reinicia la barra.",
+  "item.mahoudim.second_sorcery_code": "Code de Segunda Hechicería",
+  "item.mahoudim.second_sorcery_code.tooltip": "Mejora el Code de Primera Hechicería: seis técnicas equipables, el doble de durabilidad, 50% menos de mana y técnicas del addon 50% más potentes.",
+  "container.mahoudim.second_sorcery_slots": "Seis técnicas equipables",
+  "hud.mahoudim.juadana.ready": "¡Cargada: el siguiente golpe hará 100 de daño!",
+  "mahoudim.book.juadana.name": "Guadaña de las Almas",
+  "mahoudim.book.juadana.desc": "Hace 20 de daño. Cada baja con la guadaña llena 1 punto de la barra (100 en total). Al completarse, el siguiente golpe inflige 100 de daño y reinicia la carga.%%n%%nReceta: 3 lingotes de Netherita, 1 polvo de Mahora y 1 palo, en forma de guadaña.",
+  "mahoudim.book.second_sorcery_code.name": "Code de Segunda Hechicería",
+  "mahoudim.book.second_sorcery_code.desc": "Mejora el Code de Primera Hechicería. Receta visible en JEI: el Code original al centro, polvo de Mahora en las cuatro esquinas y polvo de diamante en los cuatro lados.%%n%%nConserva los tres pergaminos del Code original y permite equipar hasta 6, seleccionables con la rueda del Code. Tiene el doble de durabilidad que el Code de Primera Hechicería. Al lanzar las técnicas de este addon desde aquí, cuesta 50% menos mana y aumentan 50% los alcances, radios, duraciones y niveles de efecto aplicables."
 }

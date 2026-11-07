@@ -231,5 +231,15 @@
   "mahoudim.book.mahora_adaptation.desc": "The ritual grants a Mahora Wheel. While it is in your inventory, each damage type is learned separately. Every two valid hits of the same type turn the wheel and reduce that damage by 25%, then 50%, up to 75%. That type of adaptation resets after five minutes without another hit.",
   "mahoudim.msg.mahora_already_have_wheel": "You already carry a Mahora Wheel.",
   "mahoudim.msg.mahora_wheel_received": "The Mahora Wheel recognizes you. Keep it in your inventory to adapt.",
-  "mahoudim.msg.mahora_adapted": "The wheel turns: adaptation level %s/3 for that damage type."
+  "mahoudim.msg.mahora_adapted": "The wheel turns: adaptation level %s/3 for that damage type.",
+  "item.mahoudim.juadana": "Soul Reaper Scythe",
+  "item.mahoudim.juadana.tooltip": "Deals 20 damage. Each kill charges it; at 100, the next strike deals 100 damage and resets the bar.",
+  "item.mahoudim.second_sorcery_code": "Second Sorcery Code",
+  "item.mahoudim.second_sorcery_code.tooltip": "Upgrades the First Sorcery Code: six technique slots, twice the durability, 50% less mana cost, and 50% stronger addon techniques.",
+  "container.mahoudim.second_sorcery_slots": "Six equipable techniques",
+  "hud.mahoudim.juadana.ready": "Charged: the next strike deals 100 damage!",
+  "mahoudim.book.juadana.name": "Soul Reaper Scythe",
+  "mahoudim.book.juadana.desc": "Deals 20 damage. Each kill with the scythe adds 1 charge point (100 total). Once full, the next hit deals 100 damage and resets the charge.%%n%%nRecipe: 3 Netherite Ingots, 1 Mahora Powder, and 1 Stick in a scythe shape.",
+  "mahoudim.book.second_sorcery_code.name": "Second Sorcery Code",
+  "mahoudim.book.second_sorcery_code.desc": "Upgrades the First Sorcery Code. JEI recipe: place the original Code in the center, Mahora Powder in the four corners, and Powdered Diamond on the four sides.%%n%%nCarries over the original Code's three scrolls and stores up to 6 scrolls selectable with the Code wheel. Has twice the durability of the First Sorcery Code. When addon techniques are cast from it, mana cost is reduced by 50% and applicable range, radius, duration, and effect levels are increased by 50%."
 }

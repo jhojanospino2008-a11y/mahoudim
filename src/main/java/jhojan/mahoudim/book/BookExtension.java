@@ -60,6 +60,8 @@ public final class BookExtension {
 
       pages.add(info("mahora_arts"));
       pages.add(techniquePage(Technique.MAHORA_ADAPTATION));
+      pages.add(info("juadana"));
+      pages.add(info("second_sorcery_code"));
 
       int n = Math.max(1, (pages.size() + 28 - 1) / 28);
       ContentsPage[] contents = new ContentsPage[n];

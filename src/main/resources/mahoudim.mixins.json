@@ -6,7 +6,8 @@
   "client": [
     "MixinGuidebookInstance",
     "MixinMahoujinRenderer",
-    "MixinMahoujinTileEntity"
+    "MixinMahoujinTileEntity",
+    "MixinWheelGui"
   ],
   "injectors": {
     "defaultRequire": 1

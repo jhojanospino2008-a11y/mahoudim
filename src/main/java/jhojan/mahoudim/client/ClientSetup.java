@@ -1,6 +1,7 @@
 package jhojan.mahoudim.client;
 
 import jhojan.mahoudim.Reg;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -13,6 +14,11 @@ public final class ClientSetup {
 
    public static void init(IEventBus bus) {
       bus.addListener(ClientSetup::clientSetup);
+      bus.addListener(ClientSetup::registerMenuScreens);
+   }
+
+   private static void registerMenuScreens(RegisterMenuScreensEvent event) {
+      event.register(Reg.SECOND_CODE_MENU.get(), SecondCodeScreen::new);
    }
 
    private static void clientSetup(FMLClientSetupEvent e) {

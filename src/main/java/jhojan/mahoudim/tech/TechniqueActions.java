@@ -2,6 +2,7 @@ package jhojan.mahoudim.tech;
 
 import java.util.List;
 import jhojan.mahoudim.Reg;
+import jhojan.mahoudim.item.SecondSorceryCode;
 import jhojan.mahoudim.net.OpenCorePacket;
 import jhojan.mahoudim.net.OpenGatePacket;
 import jhojan.mahoudim.realm.RealmData;
@@ -41,30 +42,42 @@ public final class TechniqueActions {
    private TechniqueActions() {
    }
 
+   private static boolean enhanced(ServerPlayer player) {
+      return SecondSorceryCode.isBeingUsed(player);
+   }
+
+   private static int effect(ServerPlayer player, int value) {
+      return enhanced(player) ? Math.max(1, (int)Math.ceil(value * 1.5D)) : value;
+   }
+
+   private static int amplifier(ServerPlayer player, int value) {
+      return enhanced(player) ? Math.max(0, (int)Math.ceil((value + 1) * 1.5D) - 1) : value;
+   }
+
    public static boolean cast(Technique t, ServerPlayer p) {
       ServerLevel level = p.serverLevel();
 
       return switch (t) {
-         case TEMPORAL_REWIND -> rewind(p, level, t.param(0, 10));
-         case TIME_STASIS -> stasis(p, level, t.param(0, 12), t.param(1, 8));
-         case CHRONO_ACCELERATION -> accelerate(p, level, t.param(0, 8), t.param(1, 30));
-         case TIME_DILATION -> dilate(p, level, t.param(0, 16), t.param(1, 30));
+         case TEMPORAL_REWIND -> rewind(p, level, effect(p, t.param(0, 10)));
+         case TIME_STASIS -> stasis(p, level, effect(p, t.param(0, 12)), effect(p, t.param(1, 8)));
+         case CHRONO_ACCELERATION -> accelerate(p, level, effect(p, t.param(0, 8)), effect(p, t.param(1, 30)));
+         case TIME_DILATION -> dilate(p, level, effect(p, t.param(0, 16)), effect(p, t.param(1, 30)));
          case CHRONO_SHIFT -> shiftTime(p, level);
-         case TEMPORAL_BUBBLE -> temporalBubble(p, level, t.param(0, 12), t.param(1, 15));
-         case TIME_LEAP -> timeLeap(p, level, t.param(0, 600));
-         case CHRONO_GARDEN -> chronoGarden(p, level, t.param(0, 10), t.param(1, 20));
-         case TEMPORAL_REGENERATION -> temporalRegeneration(p, level, t.param(0, 12));
-         case TIME_SHELTER -> timeShelter(p, level, t.param(0, 10), t.param(1, 12));
+         case TEMPORAL_BUBBLE -> temporalBubble(p, level, effect(p, t.param(0, 12)), effect(p, t.param(1, 15)));
+         case TIME_LEAP -> timeLeap(p, level, effect(p, t.param(0, 600)));
+         case CHRONO_GARDEN -> chronoGarden(p, level, effect(p, t.param(0, 10)), effect(p, t.param(1, 20)));
+         case TEMPORAL_REGENERATION -> temporalRegeneration(p, level, effect(p, t.param(0, 12)));
+         case TIME_SHELTER -> timeShelter(p, level, effect(p, t.param(0, 10)), effect(p, t.param(1, 12)));
          case TEMPORAL_CORE -> openCore(p);
-         case SPATIAL_STEP -> step(p, level, t.param(0, 24));
+         case SPATIAL_STEP -> step(p, level, effect(p, t.param(0, 24)));
          case SPATIAL_ANCHOR -> recallAnchor(p);
-         case SPATIAL_VACUUM -> vacuum(p, level, t.param(0, 20));
-         case SPATIAL_TUNNEL -> tunnel(p, level, t.param(0, 24));
-         case SPATIAL_SWAP -> spatialSwap(p, level, t.param(0, 20));
+         case SPATIAL_VACUUM -> vacuum(p, level, effect(p, t.param(0, 20)));
+         case SPATIAL_TUNNEL -> tunnel(p, level, effect(p, t.param(0, 24)));
+         case SPATIAL_SWAP -> spatialSwap(p, level, effect(p, t.param(0, 20)));
          case SPATIAL_BEACON -> RealmManager.returnHome(p);
-         case SPATIAL_PULSE -> spatialPulse(p, level, t.param(0, 12));
-         case SPATIAL_PHASE -> spatialPhase(p, level, t.param(0, 10));
-         case VOID_STEP -> step(p, level, t.param(0, 36));
+         case SPATIAL_PULSE -> spatialPulse(p, level, effect(p, t.param(0, 12)));
+         case SPATIAL_PHASE -> spatialPhase(p, level, effect(p, t.param(0, 10)));
+         case VOID_STEP -> step(p, level, effect(p, t.param(0, 36)));
          case DIMENSION_TUNER -> openDimensionTuner(p, level);
          case MAHORA_ADAPTATION -> grantMahoraWheel(p, level);
       };
@@ -134,8 +147,8 @@ public final class TechniqueActions {
 
       for (Entity e : level.getEntities(p, box)) {
          if (e instanceof ServerPlayer other) {
-            other.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, 6));
-            other.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, seconds * 20, 3));
+            other.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, amplifier(p, 6)));
+            other.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, seconds * 20, amplifier(p, 3)));
             count++;
          } else if (e instanceof Mob || e instanceof Projectile) {
             TechniqueEvents.freeze(e, until);
@@ -150,8 +163,8 @@ public final class TechniqueActions {
 
    private static boolean accelerate(ServerPlayer p, ServerLevel level, int radius, int seconds) {
       TechniqueEvents.startAcceleration(p, level.getGameTime() + (long)seconds * 20L, radius);
-      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, 1));
-      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, amplifier(p, 1)));
+      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
       level.playSound(null, p.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1.5F);
       return true;
    }
@@ -161,13 +174,13 @@ public final class TechniqueActions {
 
       for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate((double)radius))) {
          if (e != p && e instanceof Enemy) {
-            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, 2));
-            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, seconds * 20, 1));
+            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, amplifier(p, 2)));
+            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, seconds * 20, amplifier(p, 1)));
             n++;
          }
       }
 
-      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, 0));
+      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, amplifier(p, 0)));
       level.playSound(null, p.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.0F, 0.7F);
       msg(p, "mahoudim.msg.dilation", n);
       return true;
@@ -182,7 +195,8 @@ public final class TechniqueActions {
          long base = t - Math.floorMod(t, 24000L);
          long tod = Math.floorMod(t, 24000L);
          long next = tod < 12500L ? base + 13000L : base + 24000L;
-         level.setDayTime(next);
+         long difference = next - t;
+         level.setDayTime(enhanced(p) ? t + (long)Math.ceil(difference * 1.5D) : next);
          level.playSound(null, p.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.5F, 0.5F);
          return true;
       }
@@ -193,14 +207,14 @@ public final class TechniqueActions {
 
       for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate((double)radius))) {
          if (e != p && e instanceof Enemy) {
-            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, 4));
-            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, seconds * 20, 1));
+            e.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, amplifier(p, 4)));
+            e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, seconds * 20, amplifier(p, 1)));
             n++;
          }
       }
 
-      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, 1));
-      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, amplifier(p, 1)));
+      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
       level.playSound(null, p.blockPosition(), SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.PLAYERS, 1.2F, 1.3F);
       msg(p, "mahoudim.msg.temporal_bubble", n);
       return true;
@@ -212,7 +226,7 @@ public final class TechniqueActions {
          return false;
       } else {
          level.setDayTime(level.getDayTime() + (long)ticks);
-         p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1));
+         p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, effect(p, 100), amplifier(p, 1)));
          level.playSound(null, p.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0F, 1.5F);
          return true;
       }
@@ -238,7 +252,7 @@ public final class TechniqueActions {
          }
       }
 
-      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
       level.playSound(null, c, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.3F, 1.8F);
       msg(p, "mahoudim.msg.chrono_garden", ticks);
       return ticks > 0;
@@ -249,9 +263,9 @@ public final class TechniqueActions {
    }
 
    private static boolean temporalRegeneration(ServerPlayer p, ServerLevel level, int seconds) {
-      p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, seconds * 20, 2));
-      p.addEffect(new MobEffectInstance(MobEffects.SATURATION, 40, 1));
-      p.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, seconds * 20, amplifier(p, 2)));
+      p.addEffect(new MobEffectInstance(MobEffects.SATURATION, effect(p, 40), amplifier(p, 1)));
+      p.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, seconds * 20, amplifier(p, 1)));
       level.playSound(null, p.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0F, 1.2F);
       return true;
    }
@@ -265,7 +279,7 @@ public final class TechniqueActions {
          count++;
       }
 
-      p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, seconds * 20, amplifier(p, 1)));
       msg(p, "mahoudim.msg.time_shelter", count);
       return true;
    }
@@ -412,7 +426,8 @@ public final class TechniqueActions {
                away = new Vec3(1.0, 0.0, 0.0);
             }
 
-            e.teleportTo(e.getX() + away.x * 8.0, e.getY() + 1.0, e.getZ() + away.z * 8.0);
+            double displacement = effect(p, 8);
+            e.teleportTo(e.getX() + away.x * displacement, e.getY() + 1.0, e.getZ() + away.z * displacement);
             moved++;
          }
       }
@@ -423,9 +438,9 @@ public final class TechniqueActions {
    }
 
    private static boolean spatialPhase(ServerPlayer p, ServerLevel level, int seconds) {
-      p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, seconds * 20, 0));
-      p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, seconds * 20, 0));
-      p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, seconds * 20, 1));
+      p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, seconds * 20, amplifier(p, 0)));
+      p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, seconds * 20, amplifier(p, 0)));
+      p.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, seconds * 20, amplifier(p, 1)));
       level.playSound(null, p.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 0.7F);
       return true;
    }

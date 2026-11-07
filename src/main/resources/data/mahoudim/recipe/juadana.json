@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NN ",
+    " PN",
+    " S "
+  ],
+  "key": {
+    "N": { "item": "minecraft:netherite_ingot" },
+    "P": { "item": "mahoudim:powdered_mahora" },
+    "S": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "id": "mahoudim:juadana",
+    "count": 1
+  }
+}
