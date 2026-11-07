@@ -1,0 +1,14 @@
+{
+  "jei.category.mahoutsukai.mahoujin": "Mahoujin",
+  "jei.category.mahoutsukai.scrolls": "Pergaminos de Mahou",
+  "jei.category.mahoutsukai.weapons": "Armas de Mahou",
+  "jei.mahoutsukai.clarent.instructions": "Haz clic derecho con una espada fortalecida mientras estás dentro del aliento del dragón",
+  "mahoutsukai.config.alchemical_wildcard_class.comment": "Clase de intercambio definida por el usuario, vacía por defecto, para bloques y etiquetas de bloques arbitrarios.",
+  "mahoutsukai.config.alchemical_wildcard_class.name": "Bloques de clase comodín del Intercambio Alquímico",
+  "mahoutsukai.config.familiar_interesting_block_render_range.comment": "Distancia a la que se resaltan los bloques interesantes para el familiar.",
+  "mahoutsukai.config.familiar_interesting_block_render_range.name": "Distancia de resaltado de bloques interesantes del familiar",
+  "mahoutsukai.config.heavens_cup_batch_size.comment": "Cantidad de nodos de la red de la Copa del Cielo procesados en cada paso.",
+  "mahoutsukai.config.heavens_cup_batch_size.name": "Tamaño de lote de recorrido de la Copa del Cielo",
+  "mahoutsukai.config.mystic_staff_explosion_sound.comment": "Indica si las explosiones del Bastón Místico reproducen su sonido.",
+  "mahoutsukai.config.mystic_staff_explosion_sound.name": "Sonido de explosión del Bastón Místico"
+}

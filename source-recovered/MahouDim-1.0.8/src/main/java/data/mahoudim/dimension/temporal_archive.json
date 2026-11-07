@@ -1,0 +1,11 @@
+{
+  "type": "mahoudim:chrono",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "mahoudim:chrono_isles",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "mahoudim:chrono_isles"
+    }
+  }
+}
