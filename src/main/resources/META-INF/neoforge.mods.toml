@@ -1,0 +1,38 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="Jhojan"
+description='''
+Addon para Mahou Tsukai: dimensiones alternas (mineria, islas cronales, fisura espacial, claro fae),
+Puerta Dimensional configurable desde un circulo magico y nuevas tecnicas de tiempo y espacio.
+Todo integrado en el libro del mod.
+'''
+
+[[mixins]]
+config="mahoudim.mixins.json"
+
+[[dependencies.mahoudim]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mahoudim]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.mahoudim]]
+    modId="mahoutsukai"
+    type="required"
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"

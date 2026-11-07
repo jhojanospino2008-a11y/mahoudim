@@ -1,17 +1,27 @@
-# MahouDim — respaldo recuperado v1.0.8
+# MahouDim — proyecto editable v1.0.8
 
-Este repositorio privado contiene el código fuente recuperado de **MahouDim 1.0.8** y el binario `mahoudim-1.0.8-spellcloth-scroll-fix.jar` que se comparó con él. Es un respaldo histórico para continuar el trabajo a partir de esta versión; no se ha copiado aquí el contenido del repositorio público de la versión fallida.
+Este repositorio ya está organizado como proyecto **Gradle + NeoForge**. El código Java editable vive en `src/main/java` y los recursos del mod en `src/main/resources`. El ZIP recuperado y el JAR original están guardados en `archive/reference/` únicamente como referencia de la versión recibida.
 
-## Contenido
+## Compilar
 
-- `source-recovered/MahouDim-1.0.8/`: fuente Java reconstruida, recursos y notas del paquete.
-- `artifacts/MahouDim-1.0.8-source-recovered.zip`: ZIP recibido, sin modificar.
-- `artifacts/mahoudim-1.0.8-spellcloth-scroll-fix.jar`: JAR recibido, sin modificar.
+Se necesita JDK 21. En Linux o macOS:
 
-## Comparación
+```bash
+./gradlew build
+```
 
-Los 227 archivos de contenido del JAR tienen una contraparte en `src/main/resources` del ZIP y sus bytes coinciden exactamente. Los metadatos identifican `modId=mahoudim`, versión `1.0.8`, Minecraft `1.21.1` y NeoForge `21.1.265+`.
+En Windows:
 
-## Limitación importante
+```bat
+gradlew.bat build
+```
 
-El ZIP indica que los 35 archivos `.java` fueron reconstruidos por decompilación porque no se encontró el proyecto fuente original. Por ello, comentarios, nombres locales y construcciones pueden diferir; el paquete no incluye un proyecto Gradle garantizado como compilable. El JAR original se conserva como referencia del comportamiento compilado.
+El JAR generado queda en `build/libs/mahoudim-1.0.8.jar`. Para abrir un entorno de pruebas se puede usar `./gradlew runClient`; el proyecto también incluye `runServer` y una acción de GitHub que ejecuta la compilación al hacer push o abrir un pull request.
+
+La compilación usa Minecraft 1.21.1, NeoForge 21.1.265 y obtiene Mahou Tsukai desde Curse Maven. No se guarda el JAR de Mahou Tsukai en este repositorio.
+
+## Procedencia y cautelas
+
+Los archivos `.java` proceden de una reconstrucción por decompilación; no se encontró el proyecto fuente original, así que comentarios y nombres locales podrían diferir de los originales. El proyecto ya pasó `./gradlew --no-daemon build` y generó el JAR, pero todavía no se ha probado dentro del cliente ni de un servidor de Minecraft. `SOURCE_RECOVERY_NOTE.txt` conserva la advertencia del paquete recibido.
+
+Los `.class` duplicados que aparecían dentro de `src/main/resources` en el ZIP no se incluyeron en el source set activo: el compilador los debe generar a partir de `src/main/java`. El ZIP original y el JAR original siguen preservados en `archive/reference/`.
