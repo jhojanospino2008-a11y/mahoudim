@@ -222,7 +222,7 @@
   "block.mahoudim.mahoujin_void_step": "Círculo de Paso del Vacío",
   "item.mahoudim.powdered_mahora": "Polvo de Mahora",
   "item.mahoudim.mahora_wheel": "Rueda de Mahora",
-  "item.mahoudim.mahora_wheel.tooltip": "Llévala en el inventario. Se adapta por separado a cada tipo de daño, hasta 75 % tras seis impactos.",
+  "item.mahoudim.mahora_wheel.tooltip": "Equípala como casco. Se adapta por separado a cada tipo de daño, hasta 80 % tras nueve impactos.",
   "item.mahoudim.scroll_mahora_adaptation": "Pergamino de Adaptación de Mahora",
   "item.mahoudim.scroll_mahora_adaptation.tooltip": "Invoca una Rueda de Mahora. Llévala para adaptarte a los daños repetidos.",
   "mahoudim.book.mahora_arts.name": "Rituales de Mahora",
@@ -230,6 +230,6 @@
   "mahoudim.book.mahora_adaptation.name": "Adaptación de Mahora",
   "mahoudim.book.mahora_adaptation.desc": "El ritual concede una Rueda de Mahora. Mientras esté en tu inventario, aprende cada tipo de daño por separado. Cada dos impactos válidos del mismo tipo, la rueda gira y reduce ese daño un 25 %, luego 50 %, hasta un máximo del 75 %. La adaptación a ese tipo se reinicia tras cinco minutos sin recibir otro impacto.",
   "mahoudim.msg.mahora_already_have_wheel": "Ya llevas una Rueda de Mahora.",
-  "mahoudim.msg.mahora_wheel_received": "La Rueda de Mahora te reconoce. Llévala en el inventario para adaptarte.",
+  "mahoudim.msg.mahora_wheel_received": "La Rueda de Mahora te reconoce. Equípala como casco para adaptarte.",
   "mahoudim.msg.mahora_adapted": "La rueda gira: adaptación nivel %s/3 para ese tipo de daño."
 }

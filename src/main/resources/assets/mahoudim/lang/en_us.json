@@ -222,7 +222,7 @@
   "block.mahoudim.mahoujin_void_step": "Void Step Circle",
   "item.mahoudim.powdered_mahora": "Mahora Powder",
   "item.mahoudim.mahora_wheel": "Mahora Wheel",
-  "item.mahoudim.mahora_wheel.tooltip": "Keep it in your inventory. It adapts separately to each damage type, up to 75% after six hits.",
+  "item.mahoudim.mahora_wheel.tooltip": "Equip it as a helmet. It adapts separately to each damage type, up to 80% after nine hits.",
   "item.mahoudim.scroll_mahora_adaptation": "Scroll of Mahora Adaptation",
   "item.mahoudim.scroll_mahora_adaptation.tooltip": "Summons a Mahora Wheel. Carry it to adapt to repeated damage.",
   "mahoudim.book.mahora_arts.name": "Mahora Rituals",
@@ -230,6 +230,6 @@
   "mahoudim.book.mahora_adaptation.name": "Mahora Adaptation",
   "mahoudim.book.mahora_adaptation.desc": "The ritual grants a Mahora Wheel. While it is in your inventory, each damage type is learned separately. Every two valid hits of the same type turn the wheel and reduce that damage by 25%, then 50%, up to 75%. That type of adaptation resets after five minutes without another hit.",
   "mahoudim.msg.mahora_already_have_wheel": "You already carry a Mahora Wheel.",
-  "mahoudim.msg.mahora_wheel_received": "The Mahora Wheel recognizes you. Keep it in your inventory to adapt.",
+  "mahoudim.msg.mahora_wheel_received": "The Mahora Wheel recognizes you. Equip it as a helmet to adapt.",
   "mahoudim.msg.mahora_adapted": "The wheel turns: adaptation level %s/3 for that damage type."
 }

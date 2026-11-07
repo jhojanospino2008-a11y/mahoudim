@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.core.particles.ParticleTypes;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -84,16 +85,6 @@ public final class MahoraAdaptationEvents {
 
    public static boolean hasWheel(ServerPlayer player) {
       var wheel = Reg.MAHORA_WHEEL.get();
-      if (player.getMainHandItem().is(wheel) || player.getOffhandItem().is(wheel)) {
-         return true;
-      }
-
-      for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
-         ItemStack stack = player.getInventory().getItem(slot);
-         if (stack.is(wheel)) {
-            return true;
-         }
-      }
-      return false;
+      return player.getItemBySlot(EquipmentSlot.HEAD).is(wheel);
    }
 }
