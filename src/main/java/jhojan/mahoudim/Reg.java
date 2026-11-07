@@ -5,6 +5,7 @@ import java.util.Map;
 import jhojan.mahoudim.block.GateCircleBlock;
 import jhojan.mahoudim.block.PocketCircleBlock;
 import jhojan.mahoudim.block.TechniqueCircleBlock;
+import jhojan.mahoudim.item.MahoraWheelItem;
 import jhojan.mahoudim.item.TechniqueScroll;
 import jhojan.mahoudim.tech.Technique;
 import jhojan.mahoudim.tile.TechniqueCircleTile;
@@ -36,6 +37,7 @@ public final class Reg {
    public static final Map<Technique.Cat, DeferredHolder<Item, PowderedCatalyst>> POWDERS = new EnumMap<>(Technique.Cat.class);
    public static final Map<Technique, DeferredHolder<Block, TechniqueCircleBlock>> TECH_BLOCKS = new EnumMap<>(Technique.class);
    public static final Map<Technique, DeferredHolder<Item, TechniqueScroll>> TECH_SCROLLS = new EnumMap<>(Technique.class);
+   public static final DeferredHolder<Item, MahoraWheelItem> MAHORA_WHEEL = ITEMS.register("mahora_wheel", MahoraWheelItem::new);
    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UtilityCircleTile>> UTILITY_TILE;
    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TechniqueCircleTile>> TECHNIQUE_TILE;
    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB;
@@ -56,6 +58,7 @@ public final class Reg {
       registerPowder(Technique.Cat.SCULK, "powdered_sculk");
       registerPowder(Technique.Cat.COPPER, "powdered_copper");
       registerPowder(Technique.Cat.NETHERITE, "powdered_netherite");
+      registerPowder(Technique.Cat.MAHORA, "powdered_mahora");
 
       for (Technique t : Technique.values()) {
          TECH_BLOCKS.put(t, BLOCKS.register("mahoujin_" + t.id, () -> new TechniqueCircleBlock(t)));
@@ -82,6 +85,8 @@ public final class Reg {
                   for (DeferredHolder<Item, PowderedCatalyst> powder : POWDERS.values()) {
                      output.accept((ItemLike)powder.get());
                   }
+
+                  output.accept(MAHORA_WHEEL.get());
                })
                .build()
       );

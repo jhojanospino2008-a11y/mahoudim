@@ -14,7 +14,8 @@ public final class PowderCatalog {
       new PowderCatalog.Entry("PRISMARINE", "powdered_prismarine", new Color(65, 210, 185)),
       new PowderCatalog.Entry("SCULK", "powdered_sculk", new Color(25, 130, 145)),
       new PowderCatalog.Entry("COPPER", "powdered_copper", new Color(220, 125, 55)),
-      new PowderCatalog.Entry("NETHERITE", "powdered_netherite", new Color(95, 80, 65))
+      new PowderCatalog.Entry("NETHERITE", "powdered_netherite", new Color(95, 80, 65)),
+      new PowderCatalog.Entry("MAHORA", "powdered_mahora", new Color(62, 82, 176))
    };
 
    private PowderCatalog() {

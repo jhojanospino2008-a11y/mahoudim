@@ -53,10 +53,13 @@ public final class BookExtension {
       pages.add(info("space_arts"));
 
       for (Technique tx : Technique.values()) {
-         if (!tx.time) {
+         if (!tx.time && tx != Technique.MAHORA_ADAPTATION) {
             pages.add(techniquePage(tx));
          }
       }
+
+      pages.add(info("mahora_arts"));
+      pages.add(techniquePage(Technique.MAHORA_ADAPTATION));
 
       int n = Math.max(1, (pages.size() + 28 - 1) / 28);
       ContentsPage[] contents = new ContentsPage[n];

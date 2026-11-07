@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "mahoutsukai:hammer"
+    }
+  ],
+  "result": {
+    "id": "mahoudim:powdered_mahora"
+  }
+}

@@ -1,6 +1,7 @@
 package jhojan.mahoudim.tech;
 
 import java.util.List;
+import jhojan.mahoudim.Reg;
 import jhojan.mahoudim.net.OpenCorePacket;
 import jhojan.mahoudim.net.OpenGatePacket;
 import jhojan.mahoudim.realm.RealmData;
@@ -65,11 +66,28 @@ public final class TechniqueActions {
          case SPATIAL_PHASE -> spatialPhase(p, level, t.param(0, 10));
          case VOID_STEP -> step(p, level, t.param(0, 36));
          case DIMENSION_TUNER -> openDimensionTuner(p, level);
+         case MAHORA_ADAPTATION -> grantMahoraWheel(p, level);
       };
    }
 
    private static void msg(ServerPlayer p, String key, Object... args) {
       p.displayClientMessage(Component.translatable(key, args), true);
+   }
+
+   private static boolean grantMahoraWheel(ServerPlayer p, ServerLevel level) {
+      if (MahoraAdaptationEvents.hasWheel(p)) {
+         msg(p, "mahoudim.msg.mahora_already_have_wheel");
+         return false;
+      }
+
+      ItemStack wheel = new ItemStack(Reg.MAHORA_WHEEL.get());
+      if (!p.getInventory().add(wheel)) {
+         p.drop(wheel, false);
+      }
+
+      level.playSound(null, p.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.2F, 0.7F);
+      msg(p, "mahoudim.msg.mahora_wheel_received");
+      return true;
    }
 
    private static boolean openCore(ServerPlayer p) {

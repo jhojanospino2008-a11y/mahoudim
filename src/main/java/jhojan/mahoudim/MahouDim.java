@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import jhojan.mahoudim.client.ClientSetup;
 import jhojan.mahoudim.net.NetRegistry;
 import jhojan.mahoudim.realm.RealmEvents;
+import jhojan.mahoudim.tech.MahoraAdaptationEvents;
 import jhojan.mahoudim.tech.TechniqueEvents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -33,6 +34,7 @@ public class MahouDim {
       bus.addListener(NetRegistry::register);
       NeoForge.EVENT_BUS.register(RealmEvents.class);
       NeoForge.EVENT_BUS.register(TechniqueEvents.class);
+      NeoForge.EVENT_BUS.register(MahoraAdaptationEvents.class);
       if (FMLEnvironment.dist == Dist.CLIENT) {
          ClientSetup.init(bus);
       }

@@ -32,6 +32,7 @@ public final class RecipeHook {
          case SCULK -> "mahoudim:powdered_sculk";
          case COPPER -> "mahoudim:powdered_copper";
          case NETHERITE -> "mahoudim:powdered_netherite";
+         case MAHORA -> "mahoudim:powdered_mahora";
       };
    }
 
@@ -62,7 +63,8 @@ public final class RecipeHook {
          Technique.Cat.PRISMARINE,
          Technique.Cat.SCULK,
          Technique.Cat.COPPER,
-         Technique.Cat.NETHERITE
+         Technique.Cat.NETHERITE,
+         Technique.Cat.MAHORA
       }) {
          MahoujinRecipeRegistrar.ingredients.put(name(cat), (ItemBase)Reg.POWDERS.get(cat).get());
       }

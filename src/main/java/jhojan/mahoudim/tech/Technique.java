@@ -23,7 +23,8 @@ public enum Technique {
    SPATIAL_PULSE("spatial_pulse", false, 750, Technique.Cat.ENDER, Technique.Cat.GOLD, Technique.Cat.EYE, 12),
    SPATIAL_PHASE("spatial_phase", false, 900, Technique.Cat.ENDER, Technique.Cat.DIAMOND, Technique.Cat.QUARTZ, 10),
    VOID_STEP("void_step", false, 450, Technique.Cat.ENDER, Technique.Cat.IRON, Technique.Cat.EYE, 36),
-   DIMENSION_TUNER("dimension_tuner", false, 700, Technique.Cat.ENDER, Technique.Cat.EMERALD, Technique.Cat.DIAMOND);
+   DIMENSION_TUNER("dimension_tuner", false, 700, Technique.Cat.ENDER, Technique.Cat.EMERALD, Technique.Cat.DIAMOND),
+   MAHORA_ADAPTATION("mahora_adaptation", false, 1600, Technique.Cat.MAHORA, Technique.Cat.NETHERITE, Technique.Cat.SCULK);
 
    public final String id;
    public final boolean time;
@@ -74,6 +75,7 @@ public enum Technique {
       PRISMARINE,
       SCULK,
       COPPER,
-      NETHERITE;
+      NETHERITE,
+      MAHORA;
    }
 }
