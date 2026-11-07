@@ -30,7 +30,6 @@ public final class ClientSetup {
 
    public static void init(IEventBus bus) {
       bus.addListener(ClientSetup::clientSetup);
-      NeoForge.EVENT_BUS.addListener(ClientSetup::renderMahoraWheel);
    }
 
    private static void clientSetup(FMLClientSetupEvent e) {
