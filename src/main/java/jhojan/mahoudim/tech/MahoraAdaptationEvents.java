@@ -71,29 +71,28 @@ public final class MahoraAdaptationEvents {
       modData.put(ADAPTATION_TAG, adaptations);
       playerData.put(ROOT_TAG, modData);
 
-      ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
-      CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag -> {
-         ListTag types = tag.contains("mahora_adapted_types", Tag.TAG_LIST)
-               ? tag.getList("mahora_adapted_types", Tag.TAG_STRING) : new ListTag();
-         boolean alreadyRecorded = false;
-         for (int i = 0; i < types.size(); i++) {
-            if (types.getString(i).equals(adaptedDamageType)) {
-               alreadyRecorded = true;
-               break;
-            }
-         }
-         if (!alreadyRecorded) {
-            types.add(StringTag.valueOf(adaptedDamageType));
-            tag.put("mahora_adapted_types", types);
-         }
-      });
-
       int level = adaptationLevel(hits);
       if (level > 0) {
          event.setNewDamage(damage * (1.0F - REDUCTION_PER_LEVEL * level));
       }
 
+      ItemStack wheel = player.getItemBySlot(EquipmentSlot.HEAD);
       if (level > 0 && (hits == START_HITS || (hits > START_HITS && (hits - START_HITS) % HITS_PER_LEVEL == 0))) {
+         CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag -> {
+            ListTag types = tag.contains("mahora_adapted_types", Tag.TAG_LIST)
+                  ? tag.getList("mahora_adapted_types", Tag.TAG_STRING) : new ListTag();
+            boolean alreadyRecorded = false;
+            for (int i = 0; i < types.size(); i++) {
+               if (types.getString(i).equals(adaptedDamageType)) {
+                  alreadyRecorded = true;
+                  break;
+               }
+            }
+            if (!alreadyRecorded) {
+               types.add(StringTag.valueOf(adaptedDamageType));
+               tag.put("mahora_adapted_types", types);
+            }
+         });
          CustomData.update(DataComponents.CUSTOM_DATA, wheel, tag ->
                tag.putInt("mahora_rotation", tag.getInt("mahora_rotation") + 1));
          ServerLevel levelWorld = player.serverLevel();
