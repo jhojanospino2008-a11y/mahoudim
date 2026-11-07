@@ -7,7 +7,8 @@
     "MixinGuidebookInstance",
     "MixinMahoujinRenderer",
     "MixinMahoujinTileEntity",
-    "MixinWheelGui"
+    "MixinWheelGui",
+    "MixinBlockElementBounds"
   ],
   "injectors": {
     "defaultRequire": 1
