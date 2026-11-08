@@ -4,7 +4,9 @@
   "package": "jhojan.mahoudim.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "MixinMahoujinWoolCarpets"
+    "MixinMahoujinWoolCarpets",
+    "MixinMysticCodeSwitchPacket",
+    "MixinMysticCodeSwitchPacketAccessor"
   ],
   "client": [
     "MixinGuidebookInstance",
@@ -12,7 +14,8 @@
     "MixinMahoujinTileEntity",
     "MixinWheelGui",
     "MixinBlockElementBounds",
-    "MixinMysticCodeRenderer"
+    "MixinMysticCodeRenderer",
+    "MixinManaClientEvents"
   ],
   "injectors": {
     "defaultRequire": 1
