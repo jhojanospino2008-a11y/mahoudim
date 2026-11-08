@@ -1,0 +1,28 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.costura_de_instante"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#minecraft:enchantable/armor",
+  "slots": [
+    "head",
+    "chest",
+    "legs",
+    "feet"
+  ],
+  "supported_items": "#minecraft:enchantable/armor",
+  "weight": 1,
+  "exclusive_set": [
+    "minecraft:thorns"
+  ]
+}

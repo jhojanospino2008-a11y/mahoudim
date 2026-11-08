@@ -2,6 +2,7 @@ package jhojan.mahoudim;
 
 import java.util.HashMap;
 import java.util.Map;
+import jhojan.mahoudim.enchantment.RitualEnchantment;
 import jhojan.mahoudim.tech.Technique;
 import net.minecraft.world.level.block.Block;
 import stepsword.mahoutsukai.block.BlockBase;
@@ -52,6 +53,24 @@ public final class RecipeHook {
       return ALLOCATED.getOrDefault("pocket", recipe(Technique.Cat.EMERALD, Technique.Cat.ENDER, Technique.Cat.IRON));
    }
 
+   public static UnorderedList juadanaRitualRecipe() {
+      return ALLOCATED.getOrDefault("juadana_ritual", recipe(Technique.Cat.NETHERITE, Technique.Cat.MAHORA, Technique.Cat.SCULK));
+   }
+
+   public static UnorderedList enchantmentRecipe(RitualEnchantment enchantment) {
+      return ALLOCATED.getOrDefault("enchantment_" + enchantment.id, recipe(enchantment.a, enchantment.b, enchantment.c));
+   }
+
+   public static boolean isCarpetRitual(UnorderedList recipe) {
+      if (recipe == null) {
+         return false;
+      }
+      return ALLOCATED.entrySet().stream().anyMatch(entry ->
+         (entry.getKey().equals("juadana_ritual") || entry.getKey().startsWith("enchantment_"))
+            && entry.getValue().equals(recipe)
+      );
+   }
+
    public static void register() {
       ALLOCATED.clear();
 
@@ -71,6 +90,16 @@ public final class RecipeHook {
 
       put("gate", recipe(Technique.Cat.DIAMOND, Technique.Cat.EMERALD, Technique.Cat.ENDER), (Block)Reg.GATE.get(), false);
       put("pocket", recipe(Technique.Cat.EMERALD, Technique.Cat.ENDER, Technique.Cat.IRON), (Block)Reg.POCKET.get(), false);
+      put("juadana_ritual", recipe(Technique.Cat.NETHERITE, Technique.Cat.MAHORA, Technique.Cat.SCULK), (Block)Reg.JUADANA_RITUAL_CIRCLE.get(), false);
+
+      for (RitualEnchantment enchantment : RitualEnchantment.values()) {
+         put(
+            "enchantment_" + enchantment.id,
+            recipe(enchantment.a, enchantment.b, enchantment.c),
+            (Block)Reg.ENCHANTMENT_CIRCLES.get(enchantment).get(),
+            false
+         );
+      }
 
       for (Technique t : Technique.values()) {
          boolean cloth = switch (t) {

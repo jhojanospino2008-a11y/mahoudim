@@ -2,6 +2,7 @@ package jhojan.mahoudim;
 
 import com.mojang.logging.LogUtils;
 import jhojan.mahoudim.client.ClientSetup;
+import jhojan.mahoudim.enchantment.RitualEnchantmentEvents;
 import jhojan.mahoudim.item.JuadanaEvents;
 import jhojan.mahoudim.item.SecondCodeCraftingEvents;
 import jhojan.mahoudim.net.NetRegistry;
@@ -40,6 +41,7 @@ public class MahouDim {
       NeoForge.EVENT_BUS.register(MahoraAdaptationEvents.class);
       NeoForge.EVENT_BUS.register(JuadanaEvents.class);
       NeoForge.EVENT_BUS.register(SecondCodeCraftingEvents.class);
+      NeoForge.EVENT_BUS.register(RitualEnchantmentEvents.class);
       if (FMLEnvironment.dist == Dist.CLIENT) {
          ClientSetup.init(bus);
       }

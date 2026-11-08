@@ -2,15 +2,21 @@ package jhojan.mahoudim;
 
 import java.util.EnumMap;
 import java.util.Map;
+import jhojan.mahoudim.block.EnchantmentRitualCircleBlock;
 import jhojan.mahoudim.block.GateCircleBlock;
+import jhojan.mahoudim.block.JuadanaRitualCircleBlock;
 import jhojan.mahoudim.block.PocketCircleBlock;
 import jhojan.mahoudim.block.TechniqueCircleBlock;
 import jhojan.mahoudim.item.JuadanaItem;
+import jhojan.mahoudim.item.JuadanaRitualScroll;
 import jhojan.mahoudim.item.MahoraWheelItem;
 import jhojan.mahoudim.item.SecondSorceryCode;
 import jhojan.mahoudim.item.TechniqueScroll;
 import jhojan.mahoudim.menu.SecondCodeMenu;
+import jhojan.mahoudim.enchantment.RitualEnchantment;
 import jhojan.mahoudim.tech.Technique;
+import jhojan.mahoudim.tile.EnchantmentRitualCircleTile;
+import jhojan.mahoudim.tile.JuadanaRitualCircleTile;
 import jhojan.mahoudim.tile.TechniqueCircleTile;
 import jhojan.mahoudim.tile.UtilityCircleTile;
 import jhojan.mahoudim.worldgen.TaggedOreFeature;
@@ -40,17 +46,22 @@ public final class Reg {
    public static final DeferredHolder<Feature<?>, TaggedOreFeature> TAGGED_ORE = FEATURES.register("tagged_ore", TaggedOreFeature::new);
    public static final DeferredHolder<Block, GateCircleBlock> GATE = BLOCKS.register("mahoujin_dimensional_gate", GateCircleBlock::new);
    public static final DeferredHolder<Block, PocketCircleBlock> POCKET = BLOCKS.register("mahoujin_spatial_pocket", PocketCircleBlock::new);
+   public static final DeferredHolder<Block, JuadanaRitualCircleBlock> JUADANA_RITUAL_CIRCLE = BLOCKS.register("mahoujin_juadana_ritual", JuadanaRitualCircleBlock::new);
    public static final Map<Technique.Cat, DeferredHolder<Item, PowderedCatalyst>> POWDERS = new EnumMap<>(Technique.Cat.class);
    public static final Map<Technique, DeferredHolder<Block, TechniqueCircleBlock>> TECH_BLOCKS = new EnumMap<>(Technique.class);
    public static final Map<Technique, DeferredHolder<Item, TechniqueScroll>> TECH_SCROLLS = new EnumMap<>(Technique.class);
+   public static final Map<RitualEnchantment, DeferredHolder<Block, EnchantmentRitualCircleBlock>> ENCHANTMENT_CIRCLES = new EnumMap<>(RitualEnchantment.class);
    public static final DeferredHolder<Item, MahoraWheelItem> MAHORA_WHEEL = ITEMS.register("mahora_wheel", MahoraWheelItem::new);
    public static final DeferredHolder<Item, JuadanaItem> JUADANA = ITEMS.register("juadana", JuadanaItem::new);
+   public static final DeferredHolder<Item, JuadanaRitualScroll> JUADANA_RITUAL_SCROLL = ITEMS.register("juadana_ritual_scroll", JuadanaRitualScroll::new);
    public static final DeferredHolder<Item, SecondSorceryCode> SECOND_SORCERY_CODE = ITEMS.register("second_sorcery_code", SecondSorceryCode::new);
    public static final DeferredHolder<MenuType<?>, MenuType<SecondCodeMenu>> SECOND_CODE_MENU = MENUS.register(
       "second_sorcery_code", () -> IMenuTypeExtension.create(SecondCodeMenu::new)
    );
    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<UtilityCircleTile>> UTILITY_TILE;
    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TechniqueCircleTile>> TECHNIQUE_TILE;
+   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<JuadanaRitualCircleTile>> JUADANA_RITUAL_TILE;
+   public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnchantmentRitualCircleTile>> ENCHANTMENT_RITUAL_TILE;
    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> TAB;
 
    private static void registerPowder(Technique.Cat cat, String id) {
@@ -76,12 +87,27 @@ public final class Reg {
          TECH_SCROLLS.put(t, ITEMS.register("scroll_" + t.id, () -> new TechniqueScroll(t)));
       }
 
+      for (RitualEnchantment enchantment : RitualEnchantment.values()) {
+         ENCHANTMENT_CIRCLES.put(enchantment, BLOCKS.register(enchantment.blockId(), () -> new EnchantmentRitualCircleBlock(enchantment)));
+      }
+
       UTILITY_TILE = BLOCK_ENTITIES.register(
          "utility_circle", () -> Builder.of(UtilityCircleTile::new, new Block[]{(Block)GATE.get(), (Block)POCKET.get()}).build(null)
       );
       TECHNIQUE_TILE = BLOCK_ENTITIES.register(
          "technique_circle",
          () -> Builder.of(TechniqueCircleTile::new, TECH_BLOCKS.values().stream().map(DeferredHolder::get).toArray(Block[]::new)).build(null)
+      );
+      JUADANA_RITUAL_TILE = BLOCK_ENTITIES.register(
+         "juadana_ritual_circle",
+         () -> Builder.of(JuadanaRitualCircleTile::new, new Block[]{(Block)JUADANA_RITUAL_CIRCLE.get()}).build(null)
+      );
+      ENCHANTMENT_RITUAL_TILE = BLOCK_ENTITIES.register(
+         "enchantment_ritual_circle",
+         () -> Builder.of(
+            EnchantmentRitualCircleTile::new,
+            ENCHANTMENT_CIRCLES.values().stream().map(DeferredHolder::get).toArray(Block[]::new)
+         ).build(null)
       );
       TAB = TABS.register(
          "arcana",
@@ -99,6 +125,7 @@ public final class Reg {
 
                   output.accept(MAHORA_WHEEL.get());
                   output.accept(JUADANA.get());
+                  output.accept(JUADANA_RITUAL_SCROLL.get());
                   output.accept(SECOND_SORCERY_CODE.get());
                })
                .build()

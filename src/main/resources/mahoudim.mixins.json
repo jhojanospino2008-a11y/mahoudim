@@ -3,12 +3,16 @@
   "minVersion": "0.8.5",
   "package": "jhojan.mahoudim.mixin",
   "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MixinMahoujinWoolCarpets"
+  ],
   "client": [
     "MixinGuidebookInstance",
     "MixinMahoujinRenderer",
     "MixinMahoujinTileEntity",
     "MixinWheelGui",
-    "MixinBlockElementBounds"
+    "MixinBlockElementBounds",
+    "MixinMysticCodeRenderer"
   ],
   "injectors": {
     "defaultRequire": 1

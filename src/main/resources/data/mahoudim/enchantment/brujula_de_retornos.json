@@ -1,0 +1,22 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.brujula_de_retornos"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#mahoudim:enchantable/compasses",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#mahoudim:enchantable/compasses",
+  "weight": 1
+}

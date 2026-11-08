@@ -3,6 +3,7 @@ package jhojan.mahoudim.book;
 import java.util.ArrayList;
 import jhojan.mahoudim.Config;
 import jhojan.mahoudim.RecipeHook;
+import jhojan.mahoudim.enchantment.RitualEnchantment;
 import jhojan.mahoudim.tech.Technique;
 import stepsword.mahoutsukai.item.guide.ContentsPage;
 import stepsword.mahoutsukai.item.guide.InfoPage;
@@ -61,7 +62,13 @@ public final class BookExtension {
       pages.add(info("mahora_arts"));
       pages.add(techniquePage(Technique.MAHORA_ADAPTATION));
       pages.add(info("juadana"));
+      pages.add(info("carpet_ritual_rules"));
+      pages.add(new SpellPage("mahoudim.book.juadana_ritual.name", RecipeHook.juadanaRitualRecipe(), "mahoudim.book.juadana_ritual.desc"));
       pages.add(info("second_sorcery_code"));
+      pages.add(info("enchantments"));
+      for (RitualEnchantment enchantment : RitualEnchantment.values()) {
+         pages.add(new SpellPage(enchantment.nameKey(), RecipeHook.enchantmentRecipe(enchantment), enchantment.descKey()));
+      }
 
       int n = Math.max(1, (pages.size() + 28 - 1) / 28);
       ContentsPage[] contents = new ContentsPage[n];

@@ -36,3 +36,24 @@ config="mahoudim.mixins.json"
     versionRange="[1,)"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.mahoudim]]
+    modId="apothic_attributes"
+    type="optional"
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.mahoudim]]
+    modId="apothic_spawners"
+    type="optional"
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.mahoudim]]
+    modId="apothic_enchanting"
+    type="optional"
+    versionRange="[1,)"
+    ordering="AFTER"
+    side="BOTH"
