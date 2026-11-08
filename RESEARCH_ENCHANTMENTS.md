@@ -2,7 +2,7 @@
 
 Minecraft 1.21.1 carga los encantamientos data-driven desde `data/<namespace>/enchantment/`, con tags de objetos para `supported_items` y `primary_items`. Los libros encantados usan los registros estándar de Minecraft, mientras que mecánicas con estado —contadores, ventanas, enfriamientos, partículas o interacciones con bloques— necesitan lógica Java del servidor. [1] [2]
 
-Cada receta de MahouDim combina tres polvos Mahoujin y produce un círculo de un solo uso que entrega un libro de nivel I. La regla local de alfombrillas exige cuatro alfombrillas de lana colocadas en los puntos cardinales, no las consume y no afecta recetas de otros mods. Los niveles superiores se obtienen combinando libros en un yunque.
+Cada receta de encantamiento de MahouDim combina tres polvos Mahoujin y produce un círculo visible de un solo uso que entrega un pergamino estándar de Mahou Tsukai. Al hacer clic derecho una vez en ese pergamino se recibe el libro encantado de nivel I. La regla local de alfombrillas exige cuatro alfombrillas de lana colocadas en los puntos cardinales, no las consume y no afecta recetas de otros mods. Los niveles superiores se obtienen combinando libros en un yunque.
 
 La compatibilidad con Apotheosis no es una dependencia obligatoria. `Apothic Attributes`, `Apothic Spawners` y `Apothic Enchanting` se declaran opcionales. Los encantamientos usan registros, libros y tags vanilla; la receta adicional de spawner se condiciona a la presencia de Apothic Spawners. La disponibilidad de estos encantamientos en las mesas de Apothic Enchanting puede depender de sus tags y configuración; no se afirma una prueba dentro del juego. [3] [4] [5]
 

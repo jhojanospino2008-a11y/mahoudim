@@ -10,6 +10,7 @@ import jhojan.mahoudim.block.TechniqueCircleBlock;
 import jhojan.mahoudim.item.JuadanaItem;
 import jhojan.mahoudim.item.JuadanaRitualScroll;
 import jhojan.mahoudim.item.MahoraWheelItem;
+import jhojan.mahoudim.item.RitualEnchantmentScroll;
 import jhojan.mahoudim.item.SecondSorceryCode;
 import jhojan.mahoudim.item.TechniqueScroll;
 import jhojan.mahoudim.menu.SecondCodeMenu;
@@ -51,6 +52,7 @@ public final class Reg {
    public static final Map<Technique, DeferredHolder<Block, TechniqueCircleBlock>> TECH_BLOCKS = new EnumMap<>(Technique.class);
    public static final Map<Technique, DeferredHolder<Item, TechniqueScroll>> TECH_SCROLLS = new EnumMap<>(Technique.class);
    public static final Map<RitualEnchantment, DeferredHolder<Block, EnchantmentRitualCircleBlock>> ENCHANTMENT_CIRCLES = new EnumMap<>(RitualEnchantment.class);
+   public static final Map<RitualEnchantment, DeferredHolder<Item, RitualEnchantmentScroll>> ENCHANTMENT_SCROLLS = new EnumMap<>(RitualEnchantment.class);
    public static final DeferredHolder<Item, MahoraWheelItem> MAHORA_WHEEL = ITEMS.register("mahora_wheel", MahoraWheelItem::new);
    public static final DeferredHolder<Item, JuadanaItem> JUADANA = ITEMS.register("juadana", JuadanaItem::new);
    public static final DeferredHolder<Item, JuadanaRitualScroll> JUADANA_RITUAL_SCROLL = ITEMS.register("juadana_ritual_scroll", JuadanaRitualScroll::new);
@@ -89,6 +91,10 @@ public final class Reg {
 
       for (RitualEnchantment enchantment : RitualEnchantment.values()) {
          ENCHANTMENT_CIRCLES.put(enchantment, BLOCKS.register(enchantment.blockId(), () -> new EnchantmentRitualCircleBlock(enchantment)));
+         ENCHANTMENT_SCROLLS.put(
+            enchantment,
+            ITEMS.register("scroll_enchantment_" + enchantment.id, () -> new RitualEnchantmentScroll(enchantment))
+         );
       }
 
       UTILITY_TILE = BLOCK_ENTITIES.register(
@@ -117,6 +123,10 @@ public final class Reg {
                .displayItems((params, output) -> {
                   for (Technique tx : Technique.values()) {
                      output.accept((ItemLike)TECH_SCROLLS.get(tx).get());
+                  }
+
+                  for (DeferredHolder<Item, RitualEnchantmentScroll> scroll : ENCHANTMENT_SCROLLS.values()) {
+                     output.accept(scroll.get());
                   }
 
                   for (DeferredHolder<Item, PowderedCatalyst> powder : POWDERS.values()) {

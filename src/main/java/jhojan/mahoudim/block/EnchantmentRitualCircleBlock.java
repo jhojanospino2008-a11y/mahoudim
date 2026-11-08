@@ -5,10 +5,9 @@ import jhojan.mahoudim.tile.EnchantmentRitualCircleTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
-import stepsword.mahoutsukai.block.spells.SingleUseMahoujinBlockTileEntity;
 
-/** One-shot Mahoujin result block that yields the ritual's enchanted book. */
-public final class EnchantmentRitualCircleBlock extends SingleUseMahoujinBlockTileEntity<EnchantmentRitualCircleTile> {
+/** One-shot Mahoujin result block that yields its matching ritual scroll. */
+public final class EnchantmentRitualCircleBlock extends RitualRewardCircleBlock<EnchantmentRitualCircleTile> {
    public final RitualEnchantment enchantment;
 
    public EnchantmentRitualCircleBlock(RitualEnchantment enchantment) {

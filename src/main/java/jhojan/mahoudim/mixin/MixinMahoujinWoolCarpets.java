@@ -3,6 +3,7 @@ package jhojan.mahoudim.mixin;
 import jhojan.mahoudim.RecipeHook;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +35,7 @@ public abstract class MixinMahoujinWoolCarpets {
       CallbackInfoReturnable<InteractionResult> cir
    ) {
       if (!level.isClientSide && mahoudim$isCarpetRitual(player) && !mahoudim$hasCarpetLayout(level, pos)) {
+         player.displayClientMessage(Component.translatable("message.mahoudim.carpet_ritual_requires_layout"), true);
          cir.setReturnValue(InteractionResult.FAIL);
       }
    }

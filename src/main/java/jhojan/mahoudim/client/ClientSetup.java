@@ -38,6 +38,8 @@ public final class ClientSetup {
       event.enqueueWork(() -> {
          BlockEntityRenderers.register((BlockEntityType)Reg.UTILITY_TILE.get(), MahoujinRenderer::new);
          BlockEntityRenderers.register((BlockEntityType)Reg.TECHNIQUE_TILE.get(), MahoujinRenderer::new);
+         BlockEntityRenderers.register((BlockEntityType)Reg.JUADANA_RITUAL_TILE.get(), MahoujinRenderer::new);
+         BlockEntityRenderers.register((BlockEntityType)Reg.ENCHANTMENT_RITUAL_TILE.get(), MahoujinRenderer::new);
       });
    }
 }

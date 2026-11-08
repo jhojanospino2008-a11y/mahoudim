@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minecraft:item/paper"
-  }
+  "parent": "mahoudim:item/ritual_scroll_standard"
 }
