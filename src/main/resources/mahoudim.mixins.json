@@ -15,7 +15,9 @@
     "MixinWheelGui",
     "MixinBlockElementBounds",
     "MixinMysticCodeRenderer",
-    "MixinManaClientEvents"
+    "MixinManaClientEvents",
+    "MixinItemInHandRenderer",
+    "MixinHumanoidModel"
   ],
   "injectors": {
     "defaultRequire": 1
