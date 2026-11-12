@@ -29,7 +29,7 @@ public record CoreActionPacket(int radius, int seconds, int multiplier) implemen
    public static void handle(CoreActionPacket msg, IPayloadContext ctx) {
       if (ctx.player() instanceof ServerPlayer p) {
          TechniqueActions.activateChronoGarden(
-            p, Math.max(3, Math.min(16, msg.radius())), Math.max(1, Math.min(60, msg.seconds())), Math.max(1, Math.min(16, msg.multiplier()))
+            p, Math.max(3, Math.min(16, msg.radius())), Math.max(1, Math.min(60, msg.seconds())), Math.max(1, Math.min(4, msg.multiplier()))
          );
       }
    }

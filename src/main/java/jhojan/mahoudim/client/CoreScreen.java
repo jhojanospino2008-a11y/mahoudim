@@ -20,17 +20,17 @@ public class CoreScreen extends Screen {
    protected void init() {
       int x = (this.width - 260) / 2;
       int y = (this.height - 130) / 2;
-      this.addRenderableWidget(Button.builder(Component.literal("Radio: 10"), b -> {
+      this.addRenderableWidget(Button.builder(Component.translatable("mahoudim.core.radius", this.radius), b -> {
          this.radius = this.radius >= 16 ? 4 : this.radius + 2;
-         b.setMessage(Component.literal("Radio: " + this.radius));
+         b.setMessage(Component.translatable("mahoudim.core.radius", this.radius));
       }).bounds(x, y, 260, 20).build());
-      this.addRenderableWidget(Button.builder(Component.literal("Duración: 20 s"), b -> {
+      this.addRenderableWidget(Button.builder(Component.translatable("mahoudim.core.duration", this.seconds), b -> {
          this.seconds = this.seconds >= 60 ? 10 : this.seconds + 10;
-         b.setMessage(Component.literal("Duración: " + this.seconds + " s"));
+         b.setMessage(Component.translatable("mahoudim.core.duration", this.seconds));
       }).bounds(x, y + 25, 260, 20).build());
-      this.addRenderableWidget(Button.builder(Component.literal("Velocidad: 4x"), b -> {
-         this.multiplier = this.multiplier >= 16 ? 1 : this.multiplier * 2;
-         b.setMessage(Component.literal("Velocidad: " + this.multiplier + "x"));
+      this.addRenderableWidget(Button.builder(Component.translatable("mahoudim.core.speed", this.multiplier), b -> {
+         this.multiplier = this.multiplier >= 4 ? 1 : this.multiplier * 2;
+         b.setMessage(Component.translatable("mahoudim.core.speed", this.multiplier));
       }).bounds(x, y + 50, 260, 20).build());
       this.addRenderableWidget(Button.builder(Component.translatable("mahoudim.core.activate"), b -> {
          PacketDistributor.sendToServer(new CoreActionPacket(this.radius, this.seconds, this.multiplier), new CustomPacketPayload[0]);

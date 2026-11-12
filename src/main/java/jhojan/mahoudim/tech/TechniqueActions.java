@@ -7,6 +7,7 @@ import jhojan.mahoudim.net.OpenCorePacket;
 import jhojan.mahoudim.net.OpenGatePacket;
 import jhojan.mahoudim.realm.RealmData;
 import jhojan.mahoudim.realm.RealmManager;
+import jhojan.mahoudim.tile.TechniqueCircleTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
@@ -59,7 +60,7 @@ public final class TechniqueActions {
 
       return switch (t) {
          case TEMPORAL_REWIND -> rewind(p, level, effect(p, t.param(0, 10)));
-         case TIME_STASIS -> stasis(p, level, effect(p, t.param(0, 12)), effect(p, t.param(1, 8)));
+         case TIME_STASIS -> TimeStopController.start(p, t.param(0, 100), effect(p, t.param(1, 8)));
          case CHRONO_ACCELERATION -> accelerate(p, level, effect(p, t.param(0, 8)), effect(p, t.param(1, 30)));
          case TIME_DILATION -> dilate(p, level, effect(p, t.param(0, 16)), effect(p, t.param(1, 30)));
          case CHRONO_SHIFT -> shiftTime(p, level);
@@ -105,8 +106,20 @@ public final class TechniqueActions {
    }
 
    private static boolean openCore(ServerPlayer p) {
+      CompoundTag data = p.getPersistentData();
+      data.putBoolean("mahoudim_core_anchor", false);
+      data.putBoolean("mahoudim_core_discounted", enhanced(p));
       PacketDistributor.sendToPlayer(p, new OpenCorePacket(), new CustomPacketPayload[0]);
       return true;
+   }
+
+   public static void openCoreAt(ServerPlayer p, BlockPos anchor) {
+      CompoundTag data = p.getPersistentData();
+      data.putBoolean("mahoudim_core_anchor", true);
+      data.putLong("mahoudim_core_anchor_pos", anchor.asLong());
+      data.putString("mahoudim_core_anchor_dim", p.level().dimension().location().toString());
+      data.putBoolean("mahoudim_core_discounted", false);
+      PacketDistributor.sendToPlayer(p, new OpenCorePacket(), new CustomPacketPayload[0]);
    }
 
    private static boolean openDimensionTuner(ServerPlayer p, ServerLevel level) {
@@ -141,29 +154,10 @@ public final class TechniqueActions {
       }
    }
 
-   private static boolean stasis(ServerPlayer p, ServerLevel level, int radius, int seconds) {
-      AABB box = p.getBoundingBox().inflate((double)radius);
-      int count = 0;
-      long until = level.getGameTime() + (long)seconds * 20L;
-
-      for (Entity e : level.getEntities(p, box)) {
-         if (e instanceof ServerPlayer other) {
-            other.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, seconds * 20, amplifier(p, 6)));
-            other.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, seconds * 20, amplifier(p, 3)));
-            count++;
-         } else if (e instanceof Mob || e instanceof Projectile) {
-            TechniqueEvents.freeze(e, until);
-            count++;
-         }
-      }
-
-      level.playSound(null, p.blockPosition(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1.5F, 0.6F);
-      msg(p, "mahoudim.msg.stasis", count);
-      return true;
-   }
-
    private static boolean accelerate(ServerPlayer p, ServerLevel level, int radius, int seconds) {
-      TechniqueEvents.startAcceleration(p, level.getGameTime() + (long)seconds * 20L, radius);
+      TechniqueEvents.startAcceleration(
+         p, level.getGameTime() + (long)seconds * 20L, radius, p.blockPosition(), effect(p, 2), 5, enhanced(p)
+      );
       p.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, seconds * 20, amplifier(p, 1)));
       p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
       level.playSound(null, p.blockPosition(), SoundEvents.BEACON_ACTIVATE, SoundSource.PLAYERS, 1.0F, 1.5F);
@@ -234,33 +228,71 @@ public final class TechniqueActions {
    }
 
    private static boolean chronoGarden(ServerPlayer p, ServerLevel level, int radius, int seconds) {
-      BlockPos c = p.blockPosition();
-      int passes = Math.max(1, seconds / 2);
-      int ticks = 0;
-
-      for (int pass = 0; pass < passes; pass++) {
-         for (int dx = -radius; dx <= radius; dx++) {
-            for (int dy = -3; dy <= 3; dy++) {
-               for (int dz = -radius; dz <= radius; dz++) {
-                  BlockPos pos = c.offset(dx, dy, dz);
-                  BlockState state = level.getBlockState(pos);
-                  if (state.isRandomlyTicking()) {
-                     state.randomTick(level, pos, level.random);
-                     ticks++;
-                  }
-               }
-            }
-         }
+      boolean started = TechniqueEvents.startAcceleration(
+         p, level.getGameTime() + (long)seconds * 20L, radius, p.blockPosition(), effect(p, 1), 5, enhanced(p)
+      );
+      if (started) {
+         p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
+         level.playSound(null, p.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.3F, 1.8F);
+         msg(p, "mahoudim.msg.chrono_garden_started", seconds, enhanced(p) ? 2.5D : 5);
       }
-
-      p.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, seconds * 20, amplifier(p, 1)));
-      level.playSound(null, c, SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.3F, 1.8F);
-      msg(p, "mahoudim.msg.chrono_garden", ticks);
-      return ticks > 0;
+      return started;
    }
 
    public static boolean activateChronoGarden(ServerPlayer p, int radius, int seconds, int multiplier) {
-      return chronoGarden(p, p.serverLevel(), radius, seconds * multiplier);
+      CompoundTag data = p.getPersistentData();
+      boolean anchored = data.getBoolean("mahoudim_core_anchor");
+      boolean discounted = data.getBoolean("mahoudim_core_discounted") || enhanced(p);
+      data.putBoolean("mahoudim_core_anchor", false);
+      data.putBoolean("mahoudim_core_discounted", false);
+
+      if (anchored) {
+         ResourceLocation dimension = ResourceLocation.tryParse(data.getString("mahoudim_core_anchor_dim"));
+         BlockPos anchor = BlockPos.of(data.getLong("mahoudim_core_anchor_pos"));
+         if (dimension == null || !dimension.equals(p.level().dimension().location())
+            || p.distanceToSqr(anchor.getX() + 0.5D, anchor.getY() + 0.5D, anchor.getZ() + 0.5D) > 64.0D
+            || !(p.level().getBlockEntity(anchor) instanceof TechniqueCircleTile tile)
+            || !tile.isFor(Technique.TEMPORAL_CORE) || !tile.canControl(p)) {
+            msg(p, "mahoudim.msg.core_anchor_invalid");
+            return false;
+         }
+
+         return tile.configureCore(p, radius, seconds, multiplier);
+      }
+
+      int safeRadius = Math.max(3, Math.min(16, radius));
+      int safeSeconds = Math.max(1, Math.min(60, seconds));
+      int boostedMultiplier = discounted ? (int)Math.ceil(multiplier * 1.5D) : multiplier;
+      int safeMultiplier = Math.max(1, Math.min(6, boostedMultiplier));
+      ServerLevel level = p.serverLevel();
+      boolean started = TechniqueEvents.startAcceleration(
+         p, level.getGameTime() + (long)safeSeconds * 20L, safeRadius, p.blockPosition(), safeMultiplier, 5, discounted
+      );
+      if (started) {
+         msg(p, "mahoudim.msg.chrono_garden_started", safeSeconds, discounted ? 2.5D : 5);
+      }
+      return started;
+   }
+
+   public static int tickGrowthBlocks(ServerLevel level, BlockPos center, int radius, int multiplier) {
+      int safeRadius = Math.max(1, Math.min(16, radius));
+      int safeMultiplier = Math.max(1, Math.min(6, multiplier));
+      int ticked = 0;
+      int attempts = 400 * safeMultiplier;
+      for (int i = 0; i < attempts; i++) {
+         int dx = level.random.nextInt(safeRadius * 2 + 1) - safeRadius;
+         int dy = level.random.nextInt(7) - 3;
+         int dz = level.random.nextInt(safeRadius * 2 + 1) - safeRadius;
+         BlockPos pos = center.offset(dx, dy, dz);
+         if (level.hasChunkAt(pos)) {
+            BlockState state = level.getBlockState(pos);
+            if (state.isRandomlyTicking()) {
+               state.randomTick(level, pos, level.random);
+               ticked++;
+            }
+         }
+      }
+      return ticked;
    }
 
    private static boolean temporalRegeneration(ServerPlayer p, ServerLevel level, int seconds) {

@@ -9,6 +9,7 @@ import jhojan.mahoudim.net.NetRegistry;
 import jhojan.mahoudim.realm.RealmEvents;
 import jhojan.mahoudim.tech.MahoraAdaptationEvents;
 import jhojan.mahoudim.tech.TechniqueEvents;
+import jhojan.mahoudim.tech.TimeStopController;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -38,6 +39,7 @@ public class MahouDim {
       bus.addListener(NetRegistry::register);
       NeoForge.EVENT_BUS.register(RealmEvents.class);
       NeoForge.EVENT_BUS.register(TechniqueEvents.class);
+      NeoForge.EVENT_BUS.register(TimeStopController.class);
       NeoForge.EVENT_BUS.register(MahoraAdaptationEvents.class);
       NeoForge.EVENT_BUS.register(JuadanaEvents.class);
       NeoForge.EVENT_BUS.register(SecondCodeCraftingEvents.class);

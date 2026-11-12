@@ -4,7 +4,7 @@ import jhojan.mahoudim.Config;
 
 public enum Technique {
    TEMPORAL_REWIND("temporal_rewind", true, 800, Technique.Cat.EMERALD, Technique.Cat.EYE, Technique.Cat.QUARTZ, 10),
-   TIME_STASIS("time_stasis", true, 1500, Technique.Cat.EMERALD, Technique.Cat.IRON, Technique.Cat.QUARTZ, 12, 8),
+   TIME_STASIS("time_stasis", true, 0, Technique.Cat.EMERALD, Technique.Cat.IRON, Technique.Cat.QUARTZ, 100, 8),
    CHRONO_ACCELERATION("chrono_acceleration", true, 600, Technique.Cat.EMERALD, Technique.Cat.GOLD, Technique.Cat.QUARTZ, 8, 30),
    TIME_DILATION("time_dilation", true, 700, Technique.Cat.DIAMOND, Technique.Cat.EMERALD, Technique.Cat.QUARTZ, 16, 30),
    CHRONO_SHIFT("chrono_shift", true, 500, Technique.Cat.EMERALD, Technique.Cat.ENDER, Technique.Cat.QUARTZ),
