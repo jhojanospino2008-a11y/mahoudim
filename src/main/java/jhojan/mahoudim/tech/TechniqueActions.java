@@ -80,6 +80,7 @@ public final class TechniqueActions {
          case VOID_STEP -> step(p, level, effect(p, t.param(0, 36)));
          case DIMENSION_TUNER -> openDimensionTuner(p, level);
          case MAHORA_ADAPTATION -> grantMahoraWheel(p, level);
+         case UNLIMITED_PROJECTION -> false;
       };
    }
 

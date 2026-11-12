@@ -1,6 +1,7 @@
 package jhojan.mahoudim.item;
 
 import java.util.List;
+import jhojan.mahoudim.tech.UnlimitedProjectionSpell;
 import jhojan.mahoudim.tech.Technique;
 import jhojan.mahoudim.tech.TechniqueActions;
 import jhojan.mahoudim.item.SecondSorceryCode;
@@ -56,14 +57,20 @@ public class TechniqueScroll extends SpellScroll {
    }
 
    public boolean doSpell(Player user, ScrollMahou mahou, ItemStack stack) {
-      if (user instanceof ServerPlayer sp && TechniqueActions.cast(this.tech, sp)) {
-         return true;
+      if (user instanceof ServerPlayer sp) {
+         if (this.tech == Technique.UNLIMITED_PROJECTION) {
+            return UnlimitedProjectionSpell.cast(sp, stack);
+         }
+         return TechniqueActions.cast(this.tech, sp);
       }
-
       return false;
    }
 
    public boolean shouldConsume(Player user, ScrollMahou scrollMahou, boolean consume, ItemStack stack) {
+      if (this.tech == Technique.UNLIMITED_PROJECTION) {
+         this.doSpell(user, scrollMahou, stack);
+         return false;
+      }
       if (this.tech == Technique.SPATIAL_ANCHOR && user.isShiftKeyDown() && user instanceof ServerPlayer sp) {
          TechniqueActions.markAnchor(sp);
          return false;

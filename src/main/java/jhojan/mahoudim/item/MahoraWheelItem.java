@@ -19,12 +19,22 @@ import net.minecraft.world.level.Level;
 
 public class MahoraWheelItem extends Item implements Equipable {
    public MahoraWheelItem() {
-      super(new Item.Properties().stacksTo(1));
+      super(new Item.Properties().stacksTo(1).durability(363));
    }
 
    @Override
    public EquipmentSlot getEquipmentSlot() {
       return EquipmentSlot.HEAD;
+   }
+
+   @Override
+   public boolean isEnchantable(ItemStack stack) {
+      return stack.getDamageValue() == 0;
+   }
+
+   @Override
+   public int getEnchantmentValue() {
+      return 15;
    }
 
    @Override

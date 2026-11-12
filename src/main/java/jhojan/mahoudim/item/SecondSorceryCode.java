@@ -60,7 +60,12 @@ public class SecondSorceryCode extends MysticCode implements MenuProvider {
 
    @Override
    public boolean isEnchantable(ItemStack stack) {
-      return false;
+      return stack.getDamageValue() == 0;
+   }
+
+   @Override
+   public int getEnchantmentValue() {
+      return 15;
    }
 
    @Override

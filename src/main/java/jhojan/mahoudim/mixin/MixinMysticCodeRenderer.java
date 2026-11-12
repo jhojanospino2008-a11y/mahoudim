@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
+import stepsword.mahoutsukai.item.mysticcode.MysticCode;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,6 +28,21 @@ public abstract class MixinMysticCodeRenderer {
          "Lcom/mojang/blaze3d/vertex/PoseStack;" +
          "Lnet/minecraft/client/renderer/MultiBufferSource;" +
          "IILnet/minecraft/client/resources/model/ModelResourceLocation;)V";
+
+   @org.spongepowered.asm.mixin.injection.Redirect(
+      method = "renderMysticCode",
+      at = @At(
+         value = "INVOKE",
+         target = "Lstepsword/mahoutsukai/item/mysticcode/MysticCode;getColor(Lnet/minecraft/world/item/ItemStack;)I",
+         remap = false
+      ),
+      remap = false
+   )
+   private static int mahoudim$alwaysShowSecondCodeRings(MysticCode code, ItemStack stack) {
+      // Amber/orange matches the Doctor Strange-style arcane circles. The original
+      // renderer still supplies the animated geometry and rotation.
+      return stack.getItem() instanceof SecondSorceryCode ? 7 : code.getColor(stack);
+   }
 
    @Inject(
       method = "renderMysticCode",

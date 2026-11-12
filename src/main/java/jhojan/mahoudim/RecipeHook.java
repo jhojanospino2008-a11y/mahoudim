@@ -66,7 +66,7 @@ public final class RecipeHook {
          return false;
       }
       return ALLOCATED.entrySet().stream().anyMatch(entry ->
-         (entry.getKey().equals("juadana_ritual") || entry.getKey().startsWith("enchantment_"))
+         (entry.getKey().equals("juadana_ritual") || entry.getKey().equals("unlimited_projection") || entry.getKey().startsWith("enchantment_"))
             && entry.getValue().equals(recipe)
       );
    }
