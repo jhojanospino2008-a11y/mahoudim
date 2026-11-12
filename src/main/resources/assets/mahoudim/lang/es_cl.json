@@ -259,5 +259,7 @@
   "mahoudim.msg.core_field_started": "Campo del núcleo activo por %s s; radio %s, multiplicador de ticks %sx.",
   "mahoudim.msg.perimeter_owner": "Solo quien lanzó el ritual puede controlar este perímetro.",
   "mahoudim.msg.perimeter_on": "Perímetro activo. Mantenimiento: %s de maná/s.",
-  "mahoudim.msg.perimeter_off": "Perímetro inactivo."
+  "mahoudim.msg.perimeter_off": "Perímetro inactivo.",
+  "mahoudim.effect.search": "Buscar efectos",
+  "mahoudim.effect.search_hint": "Buscar por nombre o mod..."
 }

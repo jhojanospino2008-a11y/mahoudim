@@ -407,6 +407,8 @@
   "message.mahoudim.unlimited_projection_memory_cleared": "Se borró la memoria de %s.",
   "mahoudim.effect.title_increment": "Incremento de Efecto",
   "mahoudim.effect.title_create": "Crear Efecto",
+  "mahoudim.effect.search": "Buscar efectos",
+  "mahoudim.effect.search_hint": "Buscar por nombre o mod...",
   "mahoudim.effect.level": "Nivel objetivo:",
   "mahoudim.effect.current_level": "Nivel actual: %s",
   "mahoudim.effect.duration": "Duración (segundos):",

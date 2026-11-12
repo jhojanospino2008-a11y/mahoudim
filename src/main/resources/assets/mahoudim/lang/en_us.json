@@ -407,6 +407,8 @@
   "message.mahoudim.unlimited_projection_memory_cleared": "Cleared the memory of %s.",
   "mahoudim.effect.title_increment": "Effect Increment",
   "mahoudim.effect.title_create": "Create Effect",
+  "mahoudim.effect.search": "Search effects",
+  "mahoudim.effect.search_hint": "Search name or mod...",
   "mahoudim.effect.level": "Target level:",
   "mahoudim.effect.current_level": "Current level: %s",
   "mahoudim.effect.duration": "Duration (seconds):",
