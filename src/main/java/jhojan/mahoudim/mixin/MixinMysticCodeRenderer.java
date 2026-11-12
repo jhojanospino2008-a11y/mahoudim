@@ -1,6 +1,7 @@
 package jhojan.mahoudim.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import jhojan.mahoudim.client.ArcaneCircleRenderer;
 import jhojan.mahoudim.item.SecondSorceryCode;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -71,6 +72,7 @@ public abstract class MixinMysticCodeRenderer {
       scaleColumn(pose, 0, targetScale.x / safeScale(currentScale.x));
       scaleColumn(pose, 1, targetScale.y / safeScale(currentScale.y));
       scaleColumn(pose, 2, targetScale.z / safeScale(currentScale.z));
+      ArcaneCircleRenderer.render(poseStack, buffer);
    }
 
    @Inject(method = "renderMysticCode", at = @At("RETURN"), remap = false)

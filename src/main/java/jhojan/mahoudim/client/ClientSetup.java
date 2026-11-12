@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -36,6 +37,7 @@ public final class ClientSetup {
 
    private static void clientSetup(FMLClientSetupEvent event) {
       event.enqueueWork(() -> {
+         NeoForge.EVENT_BUS.register(ProjectionPreviewEvents.class);
          BlockEntityRenderers.register((BlockEntityType)Reg.UTILITY_TILE.get(), MahoujinRenderer::new);
          BlockEntityRenderers.register((BlockEntityType)Reg.TECHNIQUE_TILE.get(), MahoujinRenderer::new);
          BlockEntityRenderers.register((BlockEntityType)Reg.JUADANA_RITUAL_TILE.get(), MahoujinRenderer::new);

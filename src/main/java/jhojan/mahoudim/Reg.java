@@ -9,6 +9,7 @@ import jhojan.mahoudim.block.PocketCircleBlock;
 import jhojan.mahoudim.block.TechniqueCircleBlock;
 import jhojan.mahoudim.item.JuadanaItem;
 import jhojan.mahoudim.item.JuadanaRitualScroll;
+import jhojan.mahoudim.item.EffectInscriptionBook;
 import jhojan.mahoudim.item.MahoraWheelItem;
 import jhojan.mahoudim.item.RitualEnchantmentScroll;
 import jhojan.mahoudim.item.SecondSorceryCode;
@@ -57,6 +58,7 @@ public final class Reg {
    public static final DeferredHolder<Item, JuadanaItem> JUADANA = ITEMS.register("juadana", JuadanaItem::new);
    public static final DeferredHolder<Item, JuadanaRitualScroll> JUADANA_RITUAL_SCROLL = ITEMS.register("juadana_ritual_scroll", JuadanaRitualScroll::new);
    public static final DeferredHolder<Item, SecondSorceryCode> SECOND_SORCERY_CODE = ITEMS.register("second_sorcery_code", SecondSorceryCode::new);
+   public static final DeferredHolder<Item, EffectInscriptionBook> EFFECT_INSCRIPTION_BOOK = ITEMS.register("effect_inscription_book", EffectInscriptionBook::new);
    public static final DeferredHolder<MenuType<?>, MenuType<SecondCodeMenu>> SECOND_CODE_MENU = MENUS.register(
       "second_sorcery_code", () -> IMenuTypeExtension.create(SecondCodeMenu::new)
    );
@@ -137,6 +139,7 @@ public final class Reg {
                   output.accept(JUADANA.get());
                   output.accept(JUADANA_RITUAL_SCROLL.get());
                   output.accept(SECOND_SORCERY_CODE.get());
+                  output.accept(EFFECT_INSCRIPTION_BOOK.get());
                })
                .build()
       );

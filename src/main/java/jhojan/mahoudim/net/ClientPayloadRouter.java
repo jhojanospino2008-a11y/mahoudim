@@ -18,6 +18,10 @@ public final class ClientPayloadRouter {
       invoke("openCore", OpenCorePacket.class, var0, var1);
    }
 
+   public static void openEffectScreen(OpenEffectScreenPacket packet, IPayloadContext context) {
+      invoke("openEffectScreen", OpenEffectScreenPacket.class, packet, context);
+   }
+
    private static void invoke(String var0, Class<?> var1, Object var2, IPayloadContext var3) {
       try {
          Class var4 = Class.forName("jhojan.mahoudim.client.ClientHandlers");

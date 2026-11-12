@@ -8,6 +8,7 @@ import jhojan.mahoudim.item.SecondCodeCraftingEvents;
 import jhojan.mahoudim.net.NetRegistry;
 import jhojan.mahoudim.realm.RealmEvents;
 import jhojan.mahoudim.tech.MahoraAdaptationEvents;
+import jhojan.mahoudim.tech.EffectInscriptionEvents;
 import jhojan.mahoudim.tech.TechniqueEvents;
 import jhojan.mahoudim.tech.TimeStopController;
 import net.neoforged.api.distmarker.Dist;
@@ -44,6 +45,7 @@ public class MahouDim {
       NeoForge.EVENT_BUS.register(JuadanaEvents.class);
       NeoForge.EVENT_BUS.register(SecondCodeCraftingEvents.class);
       NeoForge.EVENT_BUS.register(RitualEnchantmentEvents.class);
+      NeoForge.EVENT_BUS.register(EffectInscriptionEvents.class);
       if (FMLEnvironment.dist == Dist.CLIENT) {
          ClientSetup.init(bus);
       }

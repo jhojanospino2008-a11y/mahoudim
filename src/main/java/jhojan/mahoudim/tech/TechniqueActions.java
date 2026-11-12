@@ -82,6 +82,8 @@ public final class TechniqueActions {
          case DIMENSION_TUNER -> openDimensionTuner(p, level);
          case MAHORA_ADAPTATION -> grantMahoraWheel(p, level);
          case UNLIMITED_PROJECTION -> false;
+         case EFFECT_INCREMENT -> EffectTechniqueActions.openIncrement(p);
+         case EFFECT_CREATE -> EffectTechniqueActions.openCreate(p);
       };
    }
 

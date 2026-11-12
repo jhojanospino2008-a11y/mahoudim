@@ -236,7 +236,7 @@
   "item.mahoudim.juadana": "Guadaña de las Almas",
   "item.mahoudim.juadana.tooltip": "Hace 20 de daño. Cada baja llena su carga; al llegar a 100, el siguiente golpe inflige 100 de daño y reinicia la barra.",
   "item.mahoudim.second_sorcery_code": "Code de Segunda Hechicería",
-  "item.mahoudim.second_sorcery_code.tooltip": "Mejora el Code de Primera Hechicería: seis técnicas equipables, el doble de durabilidad, 50% menos de mana y técnicas del addon 50% más potentes.",
+  "item.mahoudim.second_sorcery_code.tooltip": "Mejora el Code de Primera Hechicería: seis técnicas equipables, el doble de durabilidad, 50% menos de maná y técnicas del addon 50% más potentes. También puedes seleccionarlas con el Code en la mano secundaria si no llevas otro Mystic Code en la principal, usando la tecla configurada para la rueda. Sus círculos arcanos giratorios brillan en violeta, cian y ámbar.",
   "container.mahoudim.second_sorcery_slots": "Seis técnicas equipables",
   "hud.mahoudim.juadana.ready": "¡Cargada: el siguiente golpe hará 100 de daño!",
   "mahoudim.book.juadana.name": "Guadaña de las Almas",

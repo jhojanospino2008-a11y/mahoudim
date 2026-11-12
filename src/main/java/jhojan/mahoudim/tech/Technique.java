@@ -25,7 +25,9 @@ public enum Technique {
    VOID_STEP("void_step", false, 450, Technique.Cat.ENDER, Technique.Cat.IRON, Technique.Cat.EYE, 36),
    DIMENSION_TUNER("dimension_tuner", false, 700, Technique.Cat.ENDER, Technique.Cat.EMERALD, Technique.Cat.DIAMOND),
    MAHORA_ADAPTATION("mahora_adaptation", false, 1600, Technique.Cat.MAHORA, Technique.Cat.NETHERITE, Technique.Cat.SCULK),
-   UNLIMITED_PROJECTION("unlimited_projection", false, 250, Technique.Cat.STONE, Technique.Cat.IRON, Technique.Cat.AMETHYST);
+   UNLIMITED_PROJECTION("unlimited_projection", false, 250, Technique.Cat.STONE, Technique.Cat.IRON, Technique.Cat.AMETHYST),
+   EFFECT_INCREMENT("effect_increment", false, 350, Technique.Cat.AMETHYST, Technique.Cat.EMERALD, Technique.Cat.QUARTZ),
+   EFFECT_CREATE("effect_create", false, 500, Technique.Cat.AMETHYST, Technique.Cat.PRISMARINE, Technique.Cat.ENDER);
 
    public final String id;
    public final boolean time;

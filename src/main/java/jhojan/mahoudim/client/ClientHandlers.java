@@ -1,6 +1,7 @@
 package jhojan.mahoudim.client;
 
 import jhojan.mahoudim.net.OpenCorePacket;
+import jhojan.mahoudim.net.OpenEffectScreenPacket;
 import jhojan.mahoudim.net.OpenGatePacket;
 import jhojan.mahoudim.realm.RealmConfig;
 import net.minecraft.client.Minecraft;
@@ -11,10 +12,14 @@ public final class ClientHandlers {
    }
 
    public static void openGate(OpenGatePacket msg, IPayloadContext ctx) {
-      Minecraft.getInstance().setScreen(new GateScreen(msg.pos(), RealmConfig.fromTag(msg.cfg()), msg.inRealm()));
+      ctx.enqueueWork(() -> Minecraft.getInstance().setScreen(new GateScreen(msg.pos(), RealmConfig.fromTag(msg.cfg()), msg.inRealm())));
    }
 
    public static void openCore(OpenCorePacket msg, IPayloadContext ctx) {
-      Minecraft.getInstance().setScreen(new CoreScreen());
+      ctx.enqueueWork(() -> Minecraft.getInstance().setScreen(new CoreScreen()));
+   }
+
+   public static void openEffectScreen(OpenEffectScreenPacket msg, IPayloadContext ctx) {
+      ctx.enqueueWork(() -> Minecraft.getInstance().setScreen(new EffectTechniqueScreen(msg)));
    }
 }
