@@ -1,7 +1,6 @@
 package jhojan.mahoudim.tech;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,6 +31,7 @@ public final class EffectTechniqueActions {
    public static final int KIND_CREATE = 1;
    public static final int ACTION_INCREMENT = 0;
    public static final int ACTION_CREATE = 1;
+   public static final int MODE_PLAYER = 0;
    public static final int MODE_BOOK = 1;
    public static final int MODE_POTION = 2;
    public static final int MAX_LEVEL = 256;
@@ -51,11 +51,7 @@ public final class EffectTechniqueActions {
          return false;
       }
       if (technique == Technique.EFFECT_CREATE) {
-         if (getOutputMode(player) != 0) {
-            return true;
-         }
-         player.displayClientMessage(Component.translatable("mahoudim.msg.effect_create_catalyst"), true);
-         return false;
+         return true;
       }
       return true;
    }
@@ -71,10 +67,6 @@ public final class EffectTechniqueActions {
 
    public static boolean openCreate(ServerPlayer player) {
       int outputMode = getOutputMode(player);
-      if (outputMode == 0) {
-         player.displayClientMessage(Component.translatable("mahoudim.msg.effect_create_catalyst"), true);
-         return false;
-      }
       PENDING.put(player.getUUID(), new Pending(KIND_CREATE, outputMode, player.serverLevel().getGameTime() + 1200L));
       PacketDistributor.sendToPlayer(player, new OpenEffectScreenPacket(KIND_CREATE, outputMode), new CustomPacketPayload[0]);
       return true;
@@ -91,7 +83,7 @@ public final class EffectTechniqueActions {
             return MODE_POTION;
          }
       }
-      return 0;
+      return MODE_PLAYER;
    }
 
    public static void handle(ServerPlayer player, EffectActionPacket packet) {
@@ -148,7 +140,7 @@ public final class EffectTechniqueActions {
          return;
       }
       if (getOutputMode(player) != outputMode) {
-         player.displayClientMessage(Component.translatable("mahoudim.msg.effect_create_catalyst"), true);
+         player.displayClientMessage(Component.translatable("mahoudim.msg.effect_menu_expired"), true);
          return;
       }
 
@@ -165,7 +157,12 @@ public final class EffectTechniqueActions {
       }
 
       Component effectName = Component.translatable(effect.value().getDescriptionId());
-      if (outputMode == MODE_BOOK) {
+      if (outputMode == MODE_PLAYER) {
+         player.addEffect(new MobEffectInstance(instance));
+         player.displayClientMessage(
+            Component.translatable("mahoudim.msg.effect_created_player", effectName, level, durationSeconds), true
+         );
+      } else if (outputMode == MODE_BOOK) {
          ItemStack book = new ItemStack(Reg.EFFECT_INSCRIPTION_BOOK.get());
          book.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY.withEffectAdded(instance));
          book.set(DataComponents.CUSTOM_NAME, Component.translatable("item.mahoudim.effect_inscription_book.named", effectName));
@@ -177,9 +174,15 @@ public final class EffectTechniqueActions {
          }
          player.displayClientMessage(Component.translatable("mahoudim.msg.effect_created_book", effectName, level), true);
       } else {
-         ItemStack bottle = player.getOffhandItem();
-         bottle.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.of(Potions.WATER), Optional.empty(), List.of(instance)));
-         bottle.set(DataComponents.CUSTOM_NAME, Component.translatable("item.mahoudim.effect_potion.named", effectName));
+         ItemStack potion = new ItemStack(Items.POTION);
+         potion.set(DataComponents.POTION_CONTENTS, PotionContents.EMPTY.withEffectAdded(instance));
+         potion.set(DataComponents.CUSTOM_NAME, Component.translatable("item.mahoudim.effect_potion.named", effectName));
+         if (!player.isCreative()) {
+            player.getOffhandItem().shrink(1);
+         }
+         if (!player.getInventory().add(potion)) {
+            player.drop(potion, false);
+         }
          player.displayClientMessage(Component.translatable("mahoudim.msg.effect_created_potion", effectName, level), true);
       }
       player.serverLevel().playSound(null, player.blockPosition(), SoundEvents.BREWING_STAND_BREW, SoundSource.PLAYERS, 0.9F, 1.1F);

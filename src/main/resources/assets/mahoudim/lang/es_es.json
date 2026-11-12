@@ -390,9 +390,9 @@
   "item.mahoudim.scroll_effect_increment": "Pergamino de Incremento de Efecto",
   "item.mahoudim.scroll_effect_increment.tooltip": "Aumenta el nivel de uno de tus efectos activos a cambio de maná.",
   "mahoudim.book.effect_create.name": "Creación de Efectos",
-  "mahoudim.book.effect_create.desc": "Con un libro en la mano secundaria, crea un tomo de inscripción; con una poción de agua, crea una poción personalizada. Elige cualquier efecto registrado, su nivel, duración y partículas. Combina el tomo con una herramienta en un yunque para inscribir el efecto; al sostener la herramienta, el efecto permanece activo.%%n%%nCuesta %%val0 de maná.",
+  "mahoudim.book.effect_create.desc": "Sin un libro o una poción de agua en la mano secundaria, aplica el efecto directamente a tu personaje. Con un libro, crea un tomo de inscripción; con una poción de agua, crea una poción personalizada que aparece en tu inventario. Elige cualquier efecto registrado, su nivel, duración y partículas. Combina el tomo con una herramienta en un yunque para inscribir el efecto; al sostenerla, el efecto permanece activo.%%n%%nCuesta %%val0 de maná.",
   "item.mahoudim.scroll_effect_create": "Pergamino de Creación de Efectos",
-  "item.mahoudim.scroll_effect_create.tooltip": "Usa un libro o una poción de agua en la mano secundaria y elige efecto, nivel, duración y partículas.",
+  "item.mahoudim.scroll_effect_create.tooltip": "Sin objeto en la mano secundaria, aplica el efecto a tu personaje. Con un libro crea un tomo; con una poción de agua crea una poción personalizada. Elige efecto, nivel, duración y partículas.",
   "item.mahoudim.effect_inscription_book": "Tomo de Inscripción de Efecto",
   "item.mahoudim.effect_inscription_book.named": "Inscripción de %s",
   "item.mahoudim.effect_inscription_book.apply_hint": "Combínalo con una herramienta o armadura en un yunque para inscribir el efecto.",
@@ -417,6 +417,7 @@
   "mahoudim.effect.disabled": "desactivadas",
   "mahoudim.effect.output_book": "Salida: tomo para yunque",
   "mahoudim.effect.output_potion": "Salida: poción en mano secundaria",
+  "mahoudim.effect.output_player": "Salida: aplicar a tu personaje",
   "mahoudim.effect.increment_hint": "Se conserva la duración restante del efecto.",
   "mahoudim.effect.apply": "Aplicar",
   "mahoudim.effect.cancel": "Cancelar",
@@ -431,5 +432,6 @@
   "mahoudim.msg.effect_not_enough_mana": "No tienes suficiente maná; se requieren %s.",
   "mahoudim.msg.effect_increment_success": "%s aumentado al nivel %s.",
   "mahoudim.msg.effect_created_book": "Creaste un tomo de %s nivel %s.",
-  "mahoudim.msg.effect_created_potion": "Creaste una poción de %s nivel %s."
+  "mahoudim.msg.effect_created_potion": "Creaste una poción de %s nivel %s.",
+  "mahoudim.msg.effect_created_player": "Aplicaste %s nivel %s durante %s s."
 }

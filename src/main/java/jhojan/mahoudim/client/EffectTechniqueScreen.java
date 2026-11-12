@@ -205,8 +205,12 @@ public final class EffectTechniqueScreen extends Screen {
       graphics.drawString(this.font, Component.translatable("mahoudim.effect.level"), x + 32, y + 88, 0xD7D9E2, false);
       if (this.durationBox != null) {
          graphics.drawString(this.font, Component.translatable("mahoudim.effect.duration"), x + 32, y + 115, 0xD7D9E2, false);
-         graphics.drawCenteredString(this.font, Component.translatable(this.request.outputMode() == EffectTechniqueActions.MODE_BOOK
-            ? "mahoudim.effect.output_book" : "mahoudim.effect.output_potion"), this.width / 2, y + 133, 0x9CA3B4);
+         String outputKey = switch (this.request.outputMode()) {
+            case EffectTechniqueActions.MODE_BOOK -> "mahoudim.effect.output_book";
+            case EffectTechniqueActions.MODE_POTION -> "mahoudim.effect.output_potion";
+            default -> "mahoudim.effect.output_player";
+         };
+         graphics.drawCenteredString(this.font, Component.translatable(outputKey), this.width / 2, y + 133, 0x9CA3B4);
       } else {
          graphics.drawCenteredString(this.font, Component.translatable("mahoudim.effect.increment_hint"), this.width / 2, y + 118, 0x9CA3B4);
       }

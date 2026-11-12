@@ -390,9 +390,9 @@
   "item.mahoudim.scroll_effect_increment": "Effect Increment Scroll",
   "item.mahoudim.scroll_effect_increment.tooltip": "Increase the level of one of your active effects at a mana cost.",
   "mahoudim.book.effect_create.name": "Effect Create",
-  "mahoudim.book.effect_create.desc": "Hold a book in your offhand to create an inscription tome, or a water potion to make a custom potion. Choose any registered effect, its level, duration, and particles. Combine the tome with a tool in an anvil to inscribe it; holding the item keeps the effect active.%%n%%nCosts %%val0 mana.",
+  "mahoudim.book.effect_create.desc": "With no book or water potion in your offhand, apply the effect directly to yourself. Hold a book to create an inscription tome, or a water potion to create a custom potion that is added to your inventory. Choose any registered effect, its level, duration, and particles. Combine the tome with a tool in an anvil to inscribe it; holding the item keeps the effect active.%%n%%nCosts %%val0 mana.",
   "item.mahoudim.scroll_effect_create": "Effect Create Scroll",
-  "item.mahoudim.scroll_effect_create.tooltip": "Hold a book or water potion in your offhand, then choose an effect, level, duration, and particles.",
+  "item.mahoudim.scroll_effect_create.tooltip": "With no offhand item, apply the effect to yourself. Hold a book to create a tome, or a water potion to create a custom potion. Choose the effect, level, duration, and particles.",
   "item.mahoudim.effect_inscription_book": "Effect Inscription Tome",
   "item.mahoudim.effect_inscription_book.named": "Inscription of %s",
   "item.mahoudim.effect_inscription_book.apply_hint": "Combine with a tool or armor in an anvil to inscribe the effect.",
@@ -417,6 +417,7 @@
   "mahoudim.effect.disabled": "off",
   "mahoudim.effect.output_book": "Output: tome for anvil",
   "mahoudim.effect.output_potion": "Output: offhand potion",
+  "mahoudim.effect.output_player": "Output: apply to yourself",
   "mahoudim.effect.increment_hint": "Remaining effect duration is preserved.",
   "mahoudim.effect.apply": "Apply",
   "mahoudim.effect.cancel": "Cancel",
@@ -431,5 +432,6 @@
   "mahoudim.msg.effect_not_enough_mana": "Not enough mana; %s required.",
   "mahoudim.msg.effect_increment_success": "%s increased to level %s.",
   "mahoudim.msg.effect_created_book": "Created a tome for %s level %s.",
-  "mahoudim.msg.effect_created_potion": "Created a potion of %s level %s."
+  "mahoudim.msg.effect_created_potion": "Created a potion of %s level %s.",
+  "mahoudim.msg.effect_created_player": "Applied %s level %s for %s seconds."
 }
