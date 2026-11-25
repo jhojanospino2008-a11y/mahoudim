@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    },
+    {
+      "item": "mahoutsukai:hammer"
+    }
+  ],
+  "result": {
+    "id": "mahoudim:powdered_stone",
+    "count": 1
+  }
+}

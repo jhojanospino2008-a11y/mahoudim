@@ -1,0 +1,11 @@
+{
+  "type": "mahoudim:rift",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "mahoudim:spatial_rift",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "mahoudim:spatial_rift"
+    }
+  }
+}

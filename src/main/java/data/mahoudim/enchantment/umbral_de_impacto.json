@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.umbral_de_impacto"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#minecraft:enchantable/trident",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/trident",
+  "weight": 1,
+  "exclusive_set": [
+    "minecraft:channeling",
+    "minecraft:loyalty"
+  ]
+}

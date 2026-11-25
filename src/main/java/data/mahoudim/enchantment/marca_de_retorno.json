@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.marca_de_retorno"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#mahoudim:enchantable/bows_and_crossbows",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#mahoudim:enchantable/bows_and_crossbows",
+  "weight": 1,
+  "exclusive_set": [
+    "minecraft:infinity",
+    "minecraft:multishot"
+  ]
+}

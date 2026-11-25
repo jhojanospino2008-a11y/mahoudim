@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MDM",
+    "DCD",
+    "MDM"
+  ],
+  "key": {
+    "M": { "item": "mahoudim:powdered_mahora" },
+    "D": { "item": "mahoutsukai:powdered_diamond" },
+    "C": { "item": "mahoutsukai:mystic_code_first_sorcery" }
+  },
+  "result": {
+    "id": "mahoudim:second_sorcery_code",
+    "count": 1
+  }
+}

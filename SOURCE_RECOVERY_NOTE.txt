@@ -1,0 +1,3 @@
+This workspace was reconstructed from mahoudim-1_0_12d-unlimited-apothic.jar supplied by the project owner.
+Java sources were decompiled with CFR 0.152; resources were extracted unchanged from the JAR.
+The decompiled sources may require cleanup for perfect round-trip compilation, but this is the closest editable source recovery of the supplied build.

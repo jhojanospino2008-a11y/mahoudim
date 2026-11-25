@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.nudo_de_anclaje"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#mahoudim:enchantable/shields",
+  "slots": [
+    "offhand"
+  ],
+  "supported_items": "#mahoudim:enchantable/shields",
+  "weight": 1,
+  "exclusive_set": [
+    "minecraft:unbreaking",
+    "minecraft:mending"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "mahoutsukai:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "id": "mahoudim:powdered_amethyst",
+    "count": 2
+  }
+}

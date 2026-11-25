@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:iron_sword",
+    "minecraft:iron_axe",
+    "minecraft:bow",
+    "minecraft:stick",
+    "minecraft:clock",
+    "minecraft:compass"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "item": "mahoutsukai:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "id": "mahoudim:powdered_netherite",
+    "count": 2
+  }
+}

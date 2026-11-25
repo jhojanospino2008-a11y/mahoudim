@@ -1,0 +1,26 @@
+{
+  "anvil_cost": 2,
+  "description": {
+    "translate": "enchantment.mahoudim.cadencia_suspendida"
+  },
+  "effects": {},
+  "max_cost": {
+    "base": 25,
+    "per_level_above_first": 10
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 10
+  },
+  "primary_items": "#mahoudim:enchantable/swords_and_axes",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#mahoudim:enchantable/swords_and_axes",
+  "weight": 1,
+  "exclusive_set": [
+    "minecraft:sharpness",
+    "minecraft:smite"
+  ]
+}
