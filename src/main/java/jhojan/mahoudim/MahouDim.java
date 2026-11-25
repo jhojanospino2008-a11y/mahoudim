@@ -34,6 +34,7 @@ public class MahouDim {
       Reg.MENUS.register(bus);
       Reg.FEATURES.register(bus);
       Reg.TABS.register(bus);
+      Reg.ENTITY_TYPES.register(bus);
       container.registerConfig(Type.SERVER, Config.SPEC);
       bus.addListener(this::commonSetup);
       bus.addListener(this::loadComplete);

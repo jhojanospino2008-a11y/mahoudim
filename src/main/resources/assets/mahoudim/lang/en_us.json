@@ -433,5 +433,14 @@
   "mahoudim.msg.effect_increment_success": "%s increased to level %s.",
   "mahoudim.msg.effect_created_book": "Created a tome for %s level %s.",
   "mahoudim.msg.effect_created_potion": "Created a potion of %s level %s.",
-  "mahoudim.msg.effect_created_player": "Applied %s level %s for %s seconds."
+  "mahoudim.msg.effect_created_player": "Applied %s level %s for %s seconds.",
+  "item.mahoudim.golden_time_wand": "Golden Time Wand",
+  "item.mahoudim.golden_time_wand.duration": "Duration: %s",
+  "item.mahoudim.golden_time_wand.target": "Target: %s",
+  "item.mahoudim.golden_time_wand.controls": "Y: change duration | Shift+Y: range/mode",
+  "item.mahoudim.golden_time_wand.free": "Uses no mana or time fluid",
+  "mahoudim.golden_time_wand.started": "Golden time field activated.",
+  "mahoudim.golden_time_wand.accelerated": "Acceleration increased: x%s",
+  "mahoudim.golden_time_wand.duration_changed": "Selected duration: %s",
+  "mahoudim.golden_time_wand.target_changed": "Selected target: %s"
 }

@@ -15,5 +15,6 @@ public final class NetRegistry {
       var1.playToServer(GateActionPacket.TYPE, GateActionPacket.CODEC, GateActionPacket::handle);
       var1.playToServer(CoreActionPacket.TYPE, CoreActionPacket.CODEC, CoreActionPacket::handle);
       var1.playToServer(EffectActionPacket.TYPE, EffectActionPacket.CODEC, EffectActionPacket::handle);
+      var1.playToServer(GoldenTimeWandConfigPacket.TYPE, GoldenTimeWandConfigPacket.CODEC, GoldenTimeWandConfigPacket::handle);
    }
 }

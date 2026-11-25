@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "mahoudim_secret",
+  "show_notification": false,
+  "key": {
+    "s": { "item": "minecraft:stick" },
+    "p": { "item": "mahoutsukai:powdered_ender" },
+    "o": { "item": "minecraft:obsidian" }
+  },
+  "pattern": [
+    "s  ",
+    " ps",
+    "oo "
+  ],
+  "result": {
+    "id": "mahoudim:golden_time_wand",
+    "count": 1
+  }
+}

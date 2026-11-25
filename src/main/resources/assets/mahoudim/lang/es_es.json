@@ -433,5 +433,14 @@
   "mahoudim.msg.effect_increment_success": "%s aumentado al nivel %s.",
   "mahoudim.msg.effect_created_book": "Creaste un tomo de %s nivel %s.",
   "mahoudim.msg.effect_created_potion": "Creaste una poción de %s nivel %s.",
-  "mahoudim.msg.effect_created_player": "Aplicaste %s nivel %s durante %s s."
+  "mahoudim.msg.effect_created_player": "Aplicaste %s nivel %s durante %s s.",
+  "item.mahoudim.golden_time_wand": "Varita del Tiempo Dorado",
+  "item.mahoudim.golden_time_wand.duration": "Duración: %s",
+  "item.mahoudim.golden_time_wand.target": "Objetivo: %s",
+  "item.mahoudim.golden_time_wand.controls": "Y: cambiar duración | Shift+Y: alcance/modo",
+  "item.mahoudim.golden_time_wand.free": "No consume maná ni fluido temporal",
+  "mahoudim.golden_time_wand.started": "Campo de tiempo dorado activado.",
+  "mahoudim.golden_time_wand.accelerated": "Aceleración aumentada: x%s",
+  "mahoudim.golden_time_wand.duration_changed": "Duración seleccionada: %s",
+  "mahoudim.golden_time_wand.target_changed": "Objetivo seleccionado: %s"
 }

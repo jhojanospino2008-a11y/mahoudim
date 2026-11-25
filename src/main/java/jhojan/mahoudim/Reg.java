@@ -9,6 +9,7 @@ import jhojan.mahoudim.block.PocketCircleBlock;
 import jhojan.mahoudim.block.TechniqueCircleBlock;
 import jhojan.mahoudim.enchantment.RitualEnchantment;
 import jhojan.mahoudim.item.EffectInscriptionBook;
+import jhojan.mahoudim.item.GoldenTimeWandItem;
 import jhojan.mahoudim.item.JuadanaItem;
 import jhojan.mahoudim.item.JuadanaRitualScroll;
 import jhojan.mahoudim.item.MahoraWheelItem;
@@ -17,6 +18,7 @@ import jhojan.mahoudim.item.SecondSorceryCode;
 import jhojan.mahoudim.item.TechniqueScroll;
 import jhojan.mahoudim.menu.SecondCodeMenu;
 import jhojan.mahoudim.tech.Technique;
+import jhojan.mahoudim.time.GoldenTimeField;
 import jhojan.mahoudim.tile.EnchantmentRitualCircleTile;
 import jhojan.mahoudim.tile.JuadanaRitualCircleTile;
 import jhojan.mahoudim.tile.TechniqueCircleTile;
@@ -25,6 +27,8 @@ import jhojan.mahoudim.worldgen.TaggedOreFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +49,7 @@ public final class Reg {
    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, "mahoudim");
    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, "mahoudim");
    public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "mahoudim");
+   public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, "mahoudim");
    public static final DeferredHolder<Feature<?>, TaggedOreFeature> TAGGED_ORE = FEATURES.register("tagged_ore", TaggedOreFeature::new);
    public static final DeferredHolder<Block, GateCircleBlock> GATE = BLOCKS.register("mahoujin_dimensional_gate", GateCircleBlock::new);
    public static final DeferredHolder<Block, PocketCircleBlock> POCKET = BLOCKS.register("mahoujin_spatial_pocket", PocketCircleBlock::new);
@@ -62,6 +67,13 @@ public final class Reg {
    public static final DeferredHolder<Item, SecondSorceryCode> SECOND_SORCERY_CODE = ITEMS.register("second_sorcery_code", SecondSorceryCode::new);
    public static final DeferredHolder<Item, EffectInscriptionBook> EFFECT_INSCRIPTION_BOOK = ITEMS.register(
       "effect_inscription_book", EffectInscriptionBook::new
+   );
+   public static final DeferredHolder<Item, GoldenTimeWandItem> GOLDEN_TIME_WAND = ITEMS.register(
+      "golden_time_wand", GoldenTimeWandItem::new
+   );
+   public static final DeferredHolder<EntityType<?>, EntityType<GoldenTimeField>> GOLDEN_TIME_FIELD = ENTITY_TYPES.register(
+      "golden_time_field", () -> EntityType.Builder.<GoldenTimeField>of(GoldenTimeField::new, MobCategory.MISC)
+         .sized(0.1F, 0.1F).clientTrackingRange(8).updateInterval(10).build("mahoudim:golden_time_field")
    );
    public static final DeferredHolder<MenuType<?>, MenuType<SecondCodeMenu>> SECOND_CODE_MENU = MENUS.register(
       "second_sorcery_code", () -> IMenuTypeExtension.create(SecondCodeMenu::new)

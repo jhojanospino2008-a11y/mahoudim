@@ -1,7 +1,10 @@
 package jhojan.mahoudim.client;
 
 import jhojan.mahoudim.Reg;
+import jhojan.mahoudim.time.GoldenTimeField;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -40,6 +43,9 @@ public final class ClientSetup {
    private static void clientSetup(FMLClientSetupEvent event) {
       event.enqueueWork(() -> {
          NeoForge.EVENT_BUS.register(ProjectionPreviewEvents.class);
+         EntityRenderers.register(Reg.GOLDEN_TIME_FIELD.get(), context -> new EntityRenderer<GoldenTimeField>(context) {
+            @Override public net.minecraft.resources.ResourceLocation getTextureLocation(GoldenTimeField entity) { return null; }
+         });
          BlockEntityRenderers.register((BlockEntityType)Reg.UTILITY_TILE.get(), MahoujinRenderer::new);
          BlockEntityRenderers.register((BlockEntityType)Reg.TECHNIQUE_TILE.get(), MahoujinRenderer::new);
          BlockEntityRenderers.register((BlockEntityType)Reg.JUADANA_RITUAL_TILE.get(), MahoujinRenderer::new);
