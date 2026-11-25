@@ -74,7 +74,7 @@ public class GoldenTimeField extends Entity {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private void tickBlock(ServerLevel level, BlockPos pos, BlockState state) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        int extraTicks = Math.min(64, 1 << Math.min(6, getSpeed()));
+        int extraTicks = 1 << Math.min(8, getSpeed());
         if (blockEntity != null) {
             BlockEntityTicker ticker = state.getTicker(level, blockEntity.getType());
             if (ticker != null) {
@@ -85,9 +85,9 @@ public class GoldenTimeField extends Entity {
         }
     }
 
-    public void increaseSpeed() { setSpeed(Math.min(6, getSpeed() + 1)); }
+    public void increaseSpeed() { setSpeed(Math.min(8, getSpeed() + 1)); }
     public int getSpeed() { return entityData.get(SPEED); }
-    public void setSpeed(int value) { entityData.set(SPEED, Math.max(1, Math.min(6, value))); }
+    public void setSpeed(int value) { entityData.set(SPEED, Math.max(1, Math.min(8, value))); }
     public int getRemaining() { return entityData.get(REMAINING); }
     public void setRemaining(int value) { entityData.set(REMAINING, value); }
     public int getTotal() { return entityData.get(TOTAL); }

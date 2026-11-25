@@ -32,7 +32,7 @@ public class GoldenTimeFieldRenderer extends EntityRenderer<GoldenTimeField> {
 
         pose.pushPose();
         pose.translate(0.5D, 1.35D, 0.5D);
-        String rate = "x" + (1 << Math.max(0, field.getSpeed()));
+        String rate = "x" + (1 << Math.min(8, Math.max(1, field.getSpeed())));
         String time = field.getRemaining() < 0 ? "∞" : String.format("%.0fs", field.getRemaining() / 20.0F);
         String range = "r" + field.getRadius();
         drawLabel(pose, buffer, rate + "  " + time, 0.0F, 0.0F, ChatFormatting.GOLD.getColor());
